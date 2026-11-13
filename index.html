@@ -1173,6 +1173,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
     <button class="btn full" id="startBtn" onclick="enterApp()">🌊 เริ่มผจญภัย</button>
     <div class="snd-note" id="sndNote"></div>
     <small id="startInfo"></small>
+    <small id="devCredit" style="display:block;margin-top:2px;font-size:.76rem;opacity:.68;color:var(--muted);letter-spacing:0"></small>
   </div>
 </section>
 
@@ -1261,6 +1262,18 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
     <button type="button" class="btn ghost" id="ulCancelBtn" onclick="closeModal()" style="flex:1">ยกเลิก</button>
     <button type="button" class="btn" id="ulSubmitBtn" onclick="tryUnlock()" style="flex:1.4">ปลดล็อกด่าน 🚀</button>
   </div></div></div>
+
+
+<!-- ===== โมดัลแจ้งเตือนเปิดผ่านเบราว์เซอร์หลัก (เฉพาะเมื่อเปิดจากแอปแชท) ===== -->
+<div class="modal" id="inAppBrowserModal"><div class="card" style="max-width:420px;text-align:left">
+  <h3 id="iabTitle" style="margin:0 0 6px;text-align:center;color:var(--deep)">🌐 แนะนำให้เปิดผ่านเบราว์เซอร์หลัก</h3>
+  <p id="iabDesc" style="margin:0 0 12px;font-size:.94rem;color:var(--muted);line-height:1.55"></p>
+  <div id="iabSteps" style="background:var(--foam);border:1px solid var(--aqua);border-radius:14px;padding:12px 14px;font-size:.9rem;line-height:1.6;color:var(--txt);margin-bottom:14px"></div>
+  <div class="row" style="gap:8px">
+    <button type="button" class="btn ghost" id="iabCopyBtn" onclick="copyGameUrl()" style="flex:1">📋 คัดลอกลิงก์</button>
+    <button type="button" class="btn" id="iabCloseBtn" onclick="closeInAppModal()" style="flex:1">เล่นต่อในหน้านี้</button>
+  </div>
+</div></div>
 
 <!-- ===== โมดัลลงชื่อนักสำรวจ ===== -->
 <div class="modal" id="nameModal"><div class="card">
@@ -2274,6 +2287,9 @@ function renderStart(){
   document.getElementById('startInfo').textContent=S.name
     ? L(`สวัสดี ${S.name} · ผ่านแล้ว ${p}/7 ด่าน`,`Hi ${S.name} · Passed ${p}/7 stages`)
     : L('เล่นผ่านครบ 7 ด่านเพื่อรับเกียรติบัตร','Complete all 7 stages to earn your certificate');
+  const dc=document.getElementById('devCredit');
+  if(dc) dc.textContent=L('พัฒนาโดย นราธิป ลีธีระ (นักวิชาการศึกษา) งานส่งเสริมวิชาการ และพัฒนาสื่อ กลุ่มพิพิธภัณฑ์สัตว์น้ำ','Developed by Narathip Leeteera (Education Officer)');
+  if(typeof renderInAppModal==='function') renderInAppModal();
 }
 function enterApp(){sfx.tap();go('viewMap');askName()}
 function askName(){if(staffAuthOk)return;if(!S.name)document.getElementById('nameModal').classList.add('show')}
@@ -2299,7 +2315,7 @@ function openUnlock(id){
   ulId=id;
   const s=getStage(id);
   document.getElementById('ulTitle').textContent=L(`🔑 ปลดล็อกด่านที่ ${id}: ${stName(s)}`,`🔑 Unlock Stage ${id}: ${stName(s)}`);
-  document.getElementById('ulDesc').innerHTML=L(`กรุณากรอก <b>รหัสผ่าน 4 หลัก</b> ที่ติดไว้ ณ ฐานกิจกรรม เพื่อเริ่มทำภารกิจ`,`Please enter the <b>4-digit code</b> posted at this station to start the stage.`);
+  document.getElementById('ulDesc').innerHTML=L(`กรุณากรอก <b>รหัสผ่าน 4 หลัก</b> ที่ติดไว้ภายในนิทรรศการเพื่อเริ่มทำภารกิจ`,`Please enter the <b>4-digit code</b> posted at this station to start the stage.`);
   const inp=document.getElementById('ulCode');
   if(inp){ inp.value=''; }
   wakaReset();
@@ -5941,6 +5957,62 @@ document.getElementById('staffPin').addEventListener('keydown',e=>{if(e.key==='E
     el.addEventListener('contextmenu',e=>e.preventDefault());
   }});
 })();
+
+(function(){
+  const ua=navigator.userAgent||'';
+  const isInApp=/Line\/|FBAN|FBAV|FB_IAB|Instagram|BytedanceWebview|Musical_ly|TikTok|MicroMessenger|Twitter|Snapchat|KAKAOTALK|Zalo/i.test(ua);
+  const isIOS=/iPhone|iPad|iPod/i.test(ua);
+  window.renderInAppModal=function(){
+    const t=document.getElementById('iabTitle');
+    const d=document.getElementById('iabDesc');
+    const s=document.getElementById('iabSteps');
+    const cb=document.getElementById('iabCopyBtn');
+    const xb=document.getElementById('iabCloseBtn');
+    if(!t||!d||!s||!cb||!xb) return;
+    t.textContent=L('🌐 แนะนำให้เปิดผ่านเบราว์เซอร์หลัก','🌐 Open in Main Browser');
+    d.textContent=L(
+      'คุณกำลังเปิดเกมผ่านแอปแชท ซึ่งอาจทำให้ข้อมูลด่านหายหรือบันทึกรูปเกียรติบัตรไม่ได้ แนะนำให้สลับไปเปิดใน Safari หรือ Chrome ตามขั้นตอนนี้ครับ:',
+      'You are opening this game inside a chat app. To keep your progress saved and download your certificate smoothly, please open it in Safari or Chrome:'
+    );
+    s.innerHTML=isIOS
+      ? L(
+          '<strong>สำหรับ iPhone / iPad:</strong><br>1. แตะไอคอน <strong>จุดสามจุด (•••)</strong> หรือปุ่ม <strong>แชร์ (↑)</strong> ที่มุมจอ<br>2. เลือก <strong>"เปิดใน Safari"</strong> (Open in Safari)<br>3. หรือกด <strong>คัดลอกลิงก์</strong> ด้านล่างแล้วนำไปวางในแอป Safari',
+          '<strong>For iPhone / iPad:</strong><br>1. Tap the <strong>•••</strong> menu or <strong>Share (↑)</strong> icon<br>2. Choose <strong>"Open in Safari"</strong><br>3. Or tap <strong>Copy Link</strong> below and paste it into Safari'
+        )
+      : L(
+          '<strong>สำหรับ Android:</strong><br>1. แตะไอคอน <strong>จุดสามจุด (⋮)</strong> ที่มุมขวาบน<br>2. เลือก <strong>"เปิดใน Chrome"</strong> หรือ <strong>"เปิดด้วยเบราว์เซอร์อื่น"</strong><br>3. หรือกด <strong>คัดลอกลิงก์</strong> ด้านล่างแล้วนำไปวางในแอป Chrome',
+          '<strong>For Android:</strong><br>1. Tap the <strong>⋮</strong> menu at the top-right<br>2. Choose <strong>"Open in Chrome"</strong> or <strong>"Open in browser"</strong><br>3. Or tap <strong>Copy Link</strong> below and paste it into Chrome'
+        );
+    cb.textContent=L('📋 คัดลอกลิงก์','📋 Copy Link');
+    xb.textContent=L('เล่นต่อในหน้านี้','Continue Here');
+  };
+  window.closeInAppModal=function(){
+    const m=document.getElementById('inAppBrowserModal');
+    if(m) m.classList.remove('show');
+  };
+  window.copyGameUrl=function(){
+    const url=window.location.href;
+    const done=()=>toast(L('คัดลอกลิงก์แล้ว! นำไปวางใน Safari หรือ Chrome ได้เลย','Link copied! Paste it into Safari or Chrome.'));
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(done).catch(()=>{fallbackCopy(url);done();});
+    }else{fallbackCopy(url);done();}
+  };
+  function fallbackCopy(val){
+    const ta=document.createElement('textarea');
+    ta.value=val;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  renderInAppModal();
+  if(isInApp){
+    setTimeout(()=>{
+      const m=document.getElementById('inAppBrowserModal');
+      if(m) m.classList.add('show');
+    }, 350);
+  }
+})();
+
 </script>
 </body>
 </html>
