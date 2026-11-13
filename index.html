@@ -593,24 +593,6 @@ header.top{color:var(--deep)}header.top p{opacity:.85}
   border-left-color:#c8445a;
   color:#7a1b2b;
 }
-.s7-slow-pill{
-  position:absolute;
-  top:8px;left:50%;
-  transform:translateX(-50%);
-  background:rgba(29,58,82,.88);
-  color:#fff;
-  font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;
-  font-size:.78rem;
-  font-weight:700;
-  padding:4px 12px;
-  border-radius:20px;
-  z-index:25;
-  pointer-events:none;
-  display:none;
-  white-space:nowrap;
-  box-shadow:0 4px 12px rgba(0,0,0,.25);
-}
-.s7-slow-pill.show{display:inline-flex;align-items:center;gap:5px}
 
 
 .lang-btn{
@@ -4627,7 +4609,6 @@ function game7(id){
       <div class="s7-wrap" id="s7wrap" style="width:${W}px">
         <div class="s7-bins">${binHTML(0,2)}</div>
         <div class="s7-arena" id="s7arena" style="width:${W}px;height:${W}px">
-          <div class="s7-slow-pill" id="s7SlowPill">${L('❄️ ชะลอความเร็วเต่า · เล็งช่องได้เลย!','❄️ Slow-Mo Active · Aim for the right bin!')}</div>
           <span style="left:5%;bottom:2%">🌿</span><span style="right:6%;bottom:2%">🪸</span><span style="left:46%;bottom:1%">🌿</span>
         </div>
         <div class="s7-bins">${binHTML(2,4)}</div>
@@ -4682,7 +4663,6 @@ function game7(id){
 
     G.onLangChange=()=>{
       const sl=q('s7SpdLbl');if(sl) sl.textContent=`🐢 ${L('ความเร็วเต่า','Turtle Speed')}`;
-      const sp=q('s7SlowPill');if(sp) sp.textContent=L('❄️ ชะลอความเร็วเต่า · เล็งช่องได้เลย!','❄️ Slow-Mo Active · Aim for the right bin!');
       binEls.forEach(b=>{
         const bd=S7_BINS.find(x=>x.id===b.dataset.bin);
         if(bd){
@@ -4846,13 +4826,6 @@ function game7(id){
       if(ended||G.ended)return;
       if(G.paused){last=now;G.raf=requestAnimationFrame(loop);return;}
       const dt=Math.min(.05,(now-last)/1000);last=now;
-      const heldItem = items.find(o=>o.held && !o.gone);
-      const anyHeld = !!heldItem;
-      const spEl = document.getElementById('s7SlowPill');
-      if(spEl){
-        spEl.classList.toggle('show', anyHeld);
-        if(heldItem) spEl.textContent = L(`❄️ ชะลอความเร็วเต่า · กำลังแยก: ${heldItem.d.short}`,`❄️ Turtle Slow-Mo · Sorting: ${heldItem.d.short_en}`);
-      }
 
       items.forEach(o=>{
         if(o.gone||o.held)return;
@@ -4880,8 +4853,7 @@ function game7(id){
         }
         if(target){
           const dx=target.x-turtle.x,dy=target.y-turtle.y,d=Math.hypot(dx,dy)||1;
-          const dragSlowdown = anyHeld ? 0.55 : 1.0;
-          const m=Math.min(d,(BASE+STEP*speedN)*dragSlowdown*K*dt);
+          const m=Math.min(d,(BASE+STEP*speedN)*K*dt);
           turtle.x+=dx/d*m;turtle.y+=dy/d*m;
           if(Math.abs(dx)>4)turtle.el.firstChild.style.transform=`scaleX(${(dx>0)===TURTLE_FACES_LEFT?-1:1})`;
           if(d<26)eat(target);
@@ -4938,8 +4910,8 @@ function game7(id){
         </div>
         <div class="fact" style="margin:10px 0;font-size:.92rem">
           ${L(
-            '🎮 <b>กติกาการเล่น:</b><br>• ขยะจะ<b>ทยอยลอยออกมาทีละ 2–3 ชิ้น</b> (รวมทั้งหมด 10 ชิ้น) ปะปนกับแมงกะพรุน<br>• ใช้นิ้วลากขยะไปปล่อยลงช่องทั้ง 4 มุมให้ถูกหมวดก่อนที่เต่าจะว่ายมางับ!<br>• 🐢 <b>เต่าไม่ใช่ตัวร้าย</b> แต่เข้าใจผิดว่าขยะคือแมงกะพรุน ถ้าเต่ากินขยะ = <b>เสียหัวใจ ❤️</b> (ขยะอันตรายต่อเต่า)<br>• ⭐ <b>ได้คะแนนเต็มเฉพาะชิ้นที่แยกถูกตั้งแต่ครั้งแรก</b> (วางผิดแล้วลองใหม่ได้ แต่ชิ้นนั้นจะไม่ได้คะแนน) ผ่านด่านเมื่อได้ครึ่งหนึ่งขึ้นไป<br>• 💡 <b>ตัวช่วย:</b> ขณะใช้นิ้วแตะลากขยะ เต่าจะว่ายช้าลงครึ่งหนึ่งเพื่อให้มีเวลาเล็งช่อง!',
-            '🎮 <b>How to Play:</b><br>• <b>2–3 waste items</b> float out at a time (10 items total) alongside real jellyfish.<br>• Drag each waste item into the matching corner bin before the sea turtle eats it!<br>• 🐢 <b>The turtle is not the enemy</b> — it mistakes trash for jellyfish. If it eats trash, you <b>lose a heart ❤️</b> (trash harms turtles).<br>• ⭐ <b>Full points for sorting correctly on the 1st try</b> (wrong tries can be retried for 0 pts; 50% required to pass).<br>• 💡 <b>Assist:</b> While dragging an item, the turtle swims at half speed so you can aim!'
+            '🎮 <b>กติกาการเล่น:</b><br>• ขยะจะ<b>ทยอยลอยออกมาทีละ 2–3 ชิ้น</b> (รวมทั้งหมด 10 ชิ้น) ปะปนกับแมงกะพรุน<br>• ใช้นิ้วลากขยะไปปล่อยลงช่องทั้ง 4 มุมให้ถูกหมวดก่อนที่เต่าจะว่ายมางับ!<br>• 🐢 <b>เต่าไม่ใช่ตัวร้าย</b> แต่เข้าใจผิดว่าขยะคือแมงกะพรุน ถ้าเต่ากินขยะ = <b>เสียหัวใจ ❤️</b> (ขยะอันตรายต่อเต่า)<br>• ⭐ <b>ได้คะแนนเต็มเฉพาะชิ้นที่แยกถูกตั้งแต่ครั้งแรก</b> (วางผิดแล้วลองใหม่ได้ แต่ชิ้นนั้นจะไม่ได้คะแนน) ผ่านด่านเมื่อได้ครึ่งหนึ่งขึ้นไป',
+            '🎮 <b>How to Play:</b><br>• <b>2–3 waste items</b> float out at a time (10 items total) alongside real jellyfish.<br>• Drag each waste item into the matching corner bin before the sea turtle eats it!<br>• 🐢 <b>The turtle is not the enemy</b> — it mistakes trash for jellyfish. If it eats trash, you <b>lose a heart ❤️</b> (trash harms turtles).<br>• ⭐ <b>Full points for sorting correctly on the 1st try</b> (wrong tries can be retried for 0 pts; 50% required to pass).'
           )}
         </div>
         </div>
