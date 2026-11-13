@@ -1202,7 +1202,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
   <div class="card" style="text-align:center">
     <img class="waka" data-waka="thumb" alt="" style="--ww:76px">
     <h2 id="fbHeading" style="margin:6px 0 4px;user-select:none;-webkit-user-select:none">⭐ ให้คะแนนความพึงพอใจก่อนรับเกียรติบัตร</h2>
-    <p id="fbSubDesc" style="color:var(--muted);font-size:.92rem;margin:0 0 12px">ยินดีด้วยที่ผ่านครบทั้ง 7 ด่าน! กรุณาให้คะแนนความพึงพอใจ เพื่อเข้าสู่หน้ารับเกียรติบัตรครับ</p>
+    <p id="fbSubDesc" style="color:var(--muted);font-size:.92rem;margin:0 0 12px">ยินดีด้วยที่ผ่านครบทั้ง 7 ด่าน! กรุณาให้คะแนนความพึงพอใจ เพื่อเข้าสู่หน้ารับเกียรติบัตร</p>
 
     <div style="background:#f3faff;border:2px solid #cbe4f5;border-radius:16px;padding:14px 12px;margin-bottom:12px;text-align:left">
       <label id="fbStarLbl" style="font-weight:700;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;display:block;text-align:center;color:var(--deep);font-size:1rem">⭐ ให้คะแนนความพึงพอใจ (1–5 ดาว) <span style="color:#d9384a">*</span></label>
@@ -1220,7 +1220,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
       <input type="text" id="fbWebsite" name="fb_extra_note" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
     </div>
 
-    <div class="fb-thanks" id="fbThanksBox">✅ บันทึกคะแนนและข้อเสนอแนะเรียบร้อยแล้ว ขอบคุณมากครับ! 🙏</div>
+    <div class="fb-thanks" id="fbThanksBox">✅ บันทึกคะแนนและข้อเสนอแนะเรียบร้อยแล้ว ขอบคุณครับ! 🙏</div>
     <button type="button" class="btn gold full" id="fbSubmitBtn" onclick="submitPlayerFeedback()">🏅 ส่งคะแนนและไปรับเกียรติบัตร ➡️</button>
     <button type="button" class="btn ghost full" id="fbBackMapBtn" style="margin-top:8px" onclick="go('viewMap')">← กลับแผนที่</button>
   </div>
@@ -1357,7 +1357,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
 <div class="modal" id="pauseModal"><div class="card" style="text-align:center">
   <img class="waka" data-waka="rest" alt="" style="--ww:104px">
   <h3 id="pauseTitle" style="margin:8px 0 4px">พักการผจญภัยชั่วคราว</h3>
-  <p id="pauseSub" style="color:var(--muted);margin:0 0 12px;font-size:.95rem">เวลาในด่านถูกหยุดไว้ชั่วคราว สามารถเดินชมตู้ปลาจริงก่อนแล้วค่อยกลับมาเล่นต่อได้เลยครับ</p>
+  <p id="pauseSub" style="color:var(--muted);margin:0 0 12px;font-size:.95rem">เวลาในด่านถูกหยุดไว้ชั่วคราว สามารถเดินชมตู้ปลาจริงก่อนแล้วค่อยกลับมาเล่นต่อได้เลยน้าา</p>
   <div class="pause-lang-box">
     <span id="pauseLangLbl">🌐 เปลี่ยนภาษา:</span>
     <button type="button" class="lang-btn" id="pauseLangBtn" onclick="toggleLang()" aria-label="Switch Language">🇹🇭 TH / 🇬🇧 EN</button>
@@ -1370,7 +1370,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
 <div class="modal" id="resetModal"><div class="card" style="text-align:center">
   <img class="waka" data-waka="think" alt="" style="--ww:78px">
   <h3 id="rstTitle" style="margin:8px 0 4px">ล้างความคืบหน้าทั้งหมด?</h3>
-  <p id="rstDesc" style="color:var(--muted);margin:0 0 14px;font-size:.95rem">ต้องการล้างตราประทับและคะแนนทั้งหมด แล้วเริ่มผจญภัยใหม่ตั้งแต่ด่านที่ 1 ใช่ไหมครับ?</p>
+  <p id="rstDesc" style="color:var(--muted);margin:0 0 14px;font-size:.95rem">ต้องการล้างตราประทับและคะแนนทั้งหมด แล้วเริ่มผจญภัยใหม่ตั้งแต่ด่านที่ 1 ใช่ไหม?</p>
   <div class="row">
     <button class="btn ghost" id="rstCancelBtn" onclick="closeResetModal()">ยกเลิก</button>
     <button class="btn bad" id="rstConfirmBtn" onclick="confirmResetAll()">🗑️ ล้างข้อมูลเริ่มใหม่</button>
@@ -1810,7 +1810,7 @@ function checkSessionExpiry(){
       const cnEl=document.getElementById('certName');if(cnEl)cnEl.value='';
       renderMap();renderStart();
       go('viewStart');
-      toast(L('⏰ ข้อมูลความคืบหน้าหมดอายุหลังครบ 2 ชั่วโมง เริ่มรอบใหม่เรียบร้อยครับ','⏰ Progress expired after 2 hours. Ready for a new session!'));
+      toast(L('⏰ ข้อมูลความคืบหน้าหมดอายุหลังครบ 2 ชั่วโมง เริ่มรอบใหม่เรียบร้อยแล้ว','⏰ Progress expired after 2 hours. Ready for a new session!'));
       return true;
     }
   }catch(e){}
@@ -2051,7 +2051,7 @@ function applyStaticLang(){
   setTxt('certBackBtn','← กลับแผนที่','← Back to Map');
 
   setTxt('fbHeading','⭐ ขอความกรุณาให้คะแนนความพึงพอใจก่อนรับเกียรติบัตร','⭐ Rate Your Experience Before Claiming Certificate');
-  setTxt('fbSubDesc','ยินดีด้วยที่ผ่านครบทั้ง 7 ด่าน! กรุณาให้คะแนนความพึงพอใจ 1–5 ดาว เพื่อเข้าสู่หน้ารับเกียรติบัตรครับ','Congratulations on passing all 7 stages! Please tap 1–5 stars (rating required · written feedback optional) to proceed to your certificate.');
+  setTxt('fbSubDesc','ยินดีด้วยที่ผ่านครบทั้ง 7 ด่าน! กรุณาให้คะแนนความพึงพอใจ 1–5 ดาว เพื่อเข้าสู่หน้ารับเกียรติบัตร','Congratulations on passing all 7 stages! Please tap 1–5 stars (rating required · written feedback optional) to proceed to your certificate.');
   setTxt('googleFormLinkBtn','📋 แบบประเมินความพึงพอใจ (Google Form) ↗','📋 Official Satisfaction Survey (Google Form) ↗');
   setHtml('fbStarLbl','⭐ ให้คะแนนความพึงพอใจ (1–5 ดาว) <span style="color:#d9384a">*</span>','⭐ Rate Your Satisfaction (1–5 Stars) <span style="color:#d9384a">*</span>');
   setTxt('fbCommentLbl','💬 ข้อเสนอแนะ / ติชม (ไม่บังคับ)','💬 Suggestions & Feedback (Optional)');
@@ -2096,7 +2096,7 @@ function applyStaticLang(){
 
   setTxt('pauseTitle','พักการผจญภัยชั่วคราว','Adventure Paused');
   setTxt('pauseLangLbl','🌐 เปลี่ยนภาษา:','🌐 Language:');
-  setTxt('pauseSub','เวลาในด่านถูกหยุดไว้ชั่วคราว สามารถเดินชมตู้ปลาจริงก่อนแล้วค่อยกลับมาเล่นต่อได้เลยครับ','Stage timer is paused. Feel free to explore the real aquarium tank and resume whenever you are ready!');
+  setTxt('pauseSub','เวลาในด่านถูกหยุดไว้ชั่วคราว สามารถเดินชมตู้ปลาจริงก่อนแล้วค่อยกลับมาเล่นต่อได้น้าา','Stage timer is paused. Feel free to explore the real aquarium tank and resume whenever you are ready!');
   setTxt('pauseResumeBtn','▶️ เล่นต่อจากเดิม','▶️ Resume Game');
   setTxt('pauseRestartBtn','🔄 เริ่มด่านนี้ใหม่','🔄 Restart Stage');
   setTxt('pauseExitBtn','🗺️ กลับหน้าแผนที่พาสปอร์ต','🗺️ Back to Passport Map');
@@ -2104,7 +2104,7 @@ function applyStaticLang(){
   setTxt('hudExitBtn','ออก','Exit');
 
   setTxt('rstTitle','ล้างความคืบหน้าทั้งหมด?','Reset All Progress?');
-  setTxt('rstDesc','ต้องการล้างตราประทับและคะแนนทั้งหมด แล้วเริ่มผจญภัยใหม่ตั้งแต่ด่านที่ 1 ใช่ไหมครับ?','Clear all collected stamps and scores and start over from Stage 1?');
+  setTxt('rstDesc','ต้องการล้างตราประทับและคะแนนทั้งหมด แล้วเริ่มผจญภัยใหม่ตั้งแต่ด่านที่ 1 ใช่ไหม?','Clear all collected stamps and scores and start over from Stage 1?');
   setTxt('rstCancelBtn','ยกเลิก','Cancel');
   setTxt('rstConfirmBtn','🗑️ ล้างข้อมูลเริ่มใหม่','🗑️ Reset All');
 
@@ -2309,7 +2309,7 @@ function openUnlock(id){
   if(!prevPassed){
     const reqId=getPrevStageId(id);
     sfx.bad();
-    toast(L(`ต้องเล่นด่านที่ ${reqId} ให้ผ่าน ${Math.round(stagePassRate(reqId)*100)}% ก่อนนะครับ!`,`Please pass Stage ${reqId} (at least ${Math.round(stagePassRate(reqId)*100)}%) first!`));
+    toast(L(`ต้องเล่นด่านที่ ${reqId} ให้ผ่าน ${Math.round(stagePassRate(reqId)*100)}% ก่อนนะ!`,`Please pass Stage ${reqId} (at least ${Math.round(stagePassRate(reqId)*100)}%) first!`));
     return;
   }
   ulId=id;
@@ -2515,7 +2515,7 @@ function openPauseModal(){
       G.onPauseRender(ps);
     }else{
       ps.textContent=L(
-        `หยุดเวลาชั่วคราวแล้ว (คอมโบสูงสุดในรอบนี้: 🔥 x${G.maxCombo||0}) · เดินชมตู้ปลาจริงก่อนแล้วค่อยกดเล่นต่อได้ทุกเมื่อครับ`,
+        `หยุดเวลาชั่วคราวแล้ว (คอมโบสูงสุดในรอบนี้: 🔥 x${G.maxCombo||0}) · เดินชมปลาก่อนแล้วค่อยกดเล่นต่อได้ทุกเมื่อ`,
         `Timer paused (Max combo this round: 🔥 x${G.maxCombo||0}) · Feel free to explore the real aquarium tank and resume anytime!`
       );
     }
@@ -3684,7 +3684,7 @@ function game4(id){
         const n=E.apex?CFG.apexGoal:CFG.need,f=E.apex?E.apexEaten:P.prog;
         document.getElementById('s45Dots').innerHTML=Array.from({length:n},(_,i)=>`<i class="${i<f?'f':''}"></i>`).join('');
         const htx=document.getElementById('s45HintTx'),hb=document.querySelector('#s45Hint b');
-        if(htx)htx.textContent=ctlMode==='joy'?L('ลากแป้นบังคับด้านล่างเพื่อว่าย','Drag the control pad below to swim'):L('ลากนิ้วบนกระดานเพื่อว่าย','Drag on the board to swim');
+        if(htx)htx.textContent=ctlMode==='joy'?L('ลากแป้นบังคับด้านล่างเพื่อว่ายน้ำ','Drag the control pad below to swim'):L('ลากนิ้วบนกระดานเพื่อว่าย','Drag on the board to swim');
         if(hb)hb.textContent=ctlMode==='joy'?'🕹️':'👆';
         const pt=document.getElementById('s45PadTitle'),ps=document.getElementById('s45PadSub');
         if(pt)pt.textContent=L('แป้นบังคับทิศทาง','Control Pad');
@@ -3767,7 +3767,7 @@ function game4(id){
       function showRound1Summary(sc){
         const ch=S45_CHAINS[0];
         const reached=ch.lv[Math.min(E.peak,3)];
-        const title=sc>=4?L('🏆 จอมล่าแห่งน้ำจืดตัวจริง!','🏆 Freshwater Apex Predator!'):sc>=3?L('🎉 ขึ้นถึงยอดห่วงโซ่อาหารแหล่งน้ำจืด!','🎉 Reached the Freshwater Top!'):sc>=1?L('👍 ไต่ได้สูงแล้ว!','👍 Nice climb!'):L('🌱 ลองใหม่อีกนิด','🌱 Try again');
+        const title=sc>=4?L('🏆 นักล่าแห่งน้ำจืดตัวจริง!','🏆 Freshwater Apex Predator!'):sc>=3?L('🎉 ขึ้นถึงยอดห่วงโซ่อาหารแหล่งน้ำจืด!','🎉 Reached the Freshwater Top!'):sc>=1?L('👍 ไต่ได้สูงแล้ว!','👍 Nice climb!'):L('🌱 ลองใหม่อีกนิด','🌱 Try again');
         const fxEl=document.getElementById('s45EvoFx');
         if(!fxEl)return;
         fxEl.style.pointerEvents='auto';
@@ -4016,7 +4016,7 @@ const MYTHS=[
   {k:'shark',ic:'🦈',t:false,
    q:'“ฉลามเกือบทุกชนิดเป็นสัตว์ดุร้ายที่จ้องตามล่าเนื้อมนุษย์เป็นอาหารหลัก”',
    q_en:'“Almost all sharks are ruthless man-eaters that actively hunt humans as their main prey.”',
-   desc:'มั่วครับ! ฉลามกินปลาและหมึกเป็นอาหาร ไม่ได้ชอบกินเนื้อคน การกัดคนมักเกิดจากความเข้าใจผิดในน้ำขุ่น',
+   desc:'มั่ว! ฉลามกินปลาและหมึกเป็นอาหาร ไม่ได้ชอบกินเนื้อคน การกัดคนมักเกิดจากความเข้าใจผิดในน้ำขุ่น',
    desc_en:'Myth! Sharks feed on fish and squid, not humans. Rare bites usually happen by mistake in murky water.'},
   {k:'coral',ic:'🪸',t:true,
    q:'“ปะการังไม่ใช่พืชน้ำและไม่ใช่ก้อนหิน แต่เป็นสัตว์ทะเลไม่มีกระดูกสันหลัง”',
@@ -4026,7 +4026,7 @@ const MYTHS=[
   {k:'grouper',ic:'👑',t:false,
    q:'“ปลาหมอทะเลยักษ์ใน Big Tank ใช้ฟันแหลมคมฉีกเนื้อเหยื่อเป็นชิ้นๆ”',
    q_en:'“Giant Groupers in the Big Tank use razor-sharp teeth to tear their prey into pieces.”',
-   desc:'มั่วครับ! ปลาหมอทะเลมีฟันซี่เล็กและนิสัยสงบ แต่ใช้วิธีอ้าปากกว้างดูดน้ำฮุบเหยื่อกลืนเข้าไปทั้งตัว',
+   desc:'มั่ว! ปลาหมอทะเลมีฟันซี่เล็กและนิสัยสงบ แต่ใช้วิธีอ้าปากกว้างดูดน้ำฮุบเหยื่อกลืนเข้าไปทั้งตัว',
    desc_en:'Myth! Giant Groupers have small teeth and calm temperaments; they open their mouths wide to create suction and swallow prey whole.'},
   {k:'clownfish',ic:'🤡',t:true,
    q:'“ปลาการ์ตูนทุกตัวเกิดมาเป็นตัวผู้ก่อน และตัวที่ใหญ่ที่สุดจะเปลี่ยนเพศเป็นตัวเมียจ่าฝูง”',
@@ -4036,7 +4036,7 @@ const MYTHS=[
   {k:'seacucumber',ic:'🥒',t:false,
    q:'“ปลิงทะเลดำเป็นสัตว์อันตรายที่คอยดูดเลือดปลาในแนวปะการัง”',
    q_en:'“Black Sea Cucumbers are blood-sucking parasites that attack reef fish.”',
-   desc:'มั่วครับ! ปลิงทะเลไม่ได้ดูดเลือด แต่ช่วยกินตะกอนอินทรีย์ตามพื้นทรายแล้วถ่ายออกมาเป็นทรายสะอาด',
+   desc:'มั่ว! ปลิงทะเลไม่ได้ดูดเลือด แต่ช่วยกินตะกอนอินทรีย์ตามพื้นทรายแล้วถ่ายออกมาเป็นทรายสะอาด',
    desc_en:'Myth! Sea Cucumbers are harmless echinoderms, not blood-sucking leeches—they clean the seabed by filtering organic detritus from sand.'},
   {k:'batfish',ic:'🍂',t:true,
    q:'“ลูกปลาหูช้างวัยอ่อนจะลอยตัวตะแคงข้างเลียนแบบใบโกงกางแห้งเพื่อพรางตัว”',
@@ -4912,7 +4912,7 @@ function game7(id){
           <span style="font-size:.85rem;font-weight:400;opacity:.95">${L('“ไม่สร้างทางตัน... มุ่งหาทางออก... ไม่ทิ้งวัสดุลงในถังขยะ”','“Turn waste into resources — Sort materials before they reach the ocean!”')}</span>
         </div>
         <p style="margin:6px 0;font-size:.94rem;color:var(--txt);text-align:left">
-          ${L('เต่าทะเลมักเข้าใจผิดว่าขยะในน้ำคือแมงกะพรุน! มาอ่าน <b>4 ช่องทางจัดการวัสดุ</b> ก่อนลงมือช่วยเต่ากันครับ:','Sea turtles often mistake floating trash for jellyfish! Review the <b>4 Material Sorting Channels</b> before rescuing the turtle:')}
+          ${L('เต่าทะเลมักเข้าใจผิดว่าขยะในน้ำคือแมงกะพรุน! มาอ่าน <b>4 ช่องทางจัดการวัสดุ</b> ก่อนลงมือช่วยเต่ากัน:','Sea turtles often mistake floating trash for jellyfish! Review the <b>4 Material Sorting Channels</b> before rescuing the turtle:')}
         </p>
         <div class="s7-guide-grid">
           <div class="s7-guide-card" style="background:#fff8db;border-left-color:#f5b700;color:#4a3400">
@@ -5082,7 +5082,7 @@ async function saveOrShareCanvasImage(canvasEl, filename, titleText){
             title:titleText||filename
           });
           sfx.ok();
-          toast(L('เลือก "บันทึกภาพ (Save Image)" เพื่อเก็บเข้าอัลบั้มรูปในมือถือได้เลยครับ 📸','Tap "Save Image" in the share menu to save directly to your Photos 📸'));
+          toast(L('เลือก "บันทึกภาพ (Save Image)" เพื่อเก็บเข้าอัลบั้มรูปในมือถือได้เลย 📸','Tap "Save Image" in the share menu to save directly to your Photos 📸'));
           return;
         }catch(shareErr){
           if(shareErr && shareErr.name==='AbortError') return;
@@ -5272,7 +5272,7 @@ async function submitPlayerFeedback(){
     if(sr && sr.animate){
       sr.animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(-5px)'},{transform:'translateX(0)'}],{duration:360});
     }
-    return toast(L('⭐ กรุณาแตะเลือกคะแนน 1–5 ดาวก่อนรับเกียรติบัตรนะครับ','⭐ Please select a 1–5 star rating before claiming your certificate'));
+    return toast(L('⭐ กรุณาแตะเลือกคะแนน 1–5 ดาวก่อนรับเกียรติบัตร','⭐ Please select a 1–5 star rating before claiming your certificate'));
   }
   // กันสแปม: ช่องดักบอทถูกกรอก หรือส่งซ้ำเร็วเกินไป -> ไม่ส่งข้อมูล แต่ให้ไปหน้าเกียรติบัตรตามปกติ
   const hpEl=document.getElementById('fbWebsite');
@@ -5470,7 +5470,7 @@ function openConnectedGoogleSheet(e){
     sfx.bad();
     const det=document.getElementById('fbrSetupDetails');
     if(det) det.open=true;
-    toast(L('กรุณาวางลิงก์หน้าตาราง Google Sheet ในช่องตั้งค่าก่อนครับ','Please set your Google Sheet URL in the setup box first'));
+    toast(L('กรุณาวางลิงก์หน้าตาราง Google Sheet ในช่องตั้งค่า','Please set your Google Sheet URL in the setup box first'));
     return false;
   }
   let win=null;
@@ -5493,7 +5493,7 @@ async function fetchFeedbackFromSheet(silent=false){
       sfx.bad();
       const det=document.getElementById('fbrSetupDetails');
       if(det) det.open=true;
-      toast(L('กรุณาตั้งค่า Google Apps Script Web App URL ก่อนครับ','Please configure the Google Apps Script Web App URL first'));
+      toast(L('กรุณาตั้งค่า Google Apps Script Web App URL ก่อน','Please configure the Google Apps Script Web App URL first'));
     }
     return;
   }
@@ -5971,7 +5971,7 @@ document.getElementById('staffPin').addEventListener('keydown',e=>{if(e.key==='E
     if(!t||!d||!s||!cb||!xb) return;
     t.textContent=L('🌐 แนะนำให้เปิดผ่านเบราว์เซอร์หลัก','🌐 Open in Main Browser');
     d.textContent=L(
-      'คุณกำลังเปิดเกมผ่านแอปแชท ซึ่งอาจทำให้ข้อมูลด่านหายหรือบันทึกรูปเกียรติบัตรไม่ได้ แนะนำให้สลับไปเปิดใน Safari หรือ Chrome ตามขั้นตอนนี้ครับ:',
+      'คุณกำลังเปิดเกมผ่านแอปแชท ซึ่งอาจทำให้ข้อมูลด่านหายหรือบันทึกรูปเกียรติบัตรไม่ได้ แนะนำให้สลับไปเปิดใน Safari หรือ Chrome ตามขั้นตอนนี้:',
       'You are opening this game inside a chat app. To keep your progress saved and download your certificate smoothly, please open it in Safari or Chrome:'
     );
     s.innerHTML=isIOS
