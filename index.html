@@ -3,7 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<style>html,body{touch-action:pan-x pan-y}</style>
+<style>html,body{touch-action:pan-x pan-y}.pdpa-note{background:#f0f8fb;border:1px solid #c5d9e4;border-left:3.5px solid #2d7aa6;border-radius:10px;padding:8px 11px;margin:4px 0 12px;font-size:.78rem;line-height:1.45;color:var(--muted);text-align:left}
+
+/* ===== UI Page Transition & Staggered Float-Up Animations ===== */
+@keyframes uiViewFade{from{opacity:0}to{opacity:1}}
+@keyframes uiFloatUp{from{opacity:0;transform:translate3d(0,28px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+@keyframes uiModalBg{from{opacity:0}to{opacity:1}}
+@keyframes uiModalFloat{from{opacity:0;transform:translate3d(0,30px,0) scale(.95)}to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+
+.view.active{animation:uiViewFade .40s ease-out}
+
+/* หน้าแรก (#viewStart) */
+#viewStart.active .start-wrap > *{animation:uiFloatUp .75s cubic-bezier(.22,1,.36,1) backwards}
+#viewStart.active .start-wrap > *:nth-child(1){animation-delay:.06s}
+#viewStart.active .start-wrap > *:nth-child(2){animation-delay:.16s}
+#viewStart.active .start-wrap > *:nth-child(3){animation-delay:.26s}
+#viewStart.active .start-wrap > *:nth-child(4){animation-delay:.36s}
+#viewStart.active .start-wrap > *:nth-child(5){animation-delay:.46s}
+#viewStart.active .start-wrap > *:nth-child(6){animation-delay:.56s}
+#viewStart.active .start-wrap > *:nth-child(7){animation-delay:.66s}
+#viewStart.active .start-wrap > *:nth-child(8){animation-delay:.76s}
+#viewStart.active .start-wrap > *:nth-child(9){animation-delay:.86s}
+#viewStart.active #startBtn{animation:uiFloatUp .75s cubic-bezier(.22,1,.36,1) .56s backwards,pulse 2s ease-in-out 1.4s infinite}
+
+/* หน้าแผนที่ (#viewMap) */
+#viewMap.active > header.top{animation:uiFloatUp .68s cubic-bezier(.22,1,.36,1) .06s backwards}
+#viewMap.active > .card:first-of-type{animation:uiFloatUp .70s cubic-bezier(.22,1,.36,1) .16s backwards}
+#viewMap.active > .card:last-of-type{animation:uiFloatUp .70s cubic-bezier(.22,1,.36,1) .36s backwards}
+
+/* หน้าประเมิน (#viewRate) และหน้าเกียรติบัตร (#viewCert) */
+#viewRate.active > .card,
+#viewCert.active > .card{animation:uiFloatUp .62s cubic-bezier(.22,1,.36,1) backwards}
+#viewRate.active > .card > *,
+#viewCert.active > .card > *{animation:uiFloatUp .68s cubic-bezier(.22,1,.36,1) backwards}
+#viewRate.active > .card > *:nth-child(1),#viewCert.active > .card > *:nth-child(1){animation-delay:.08s}
+#viewRate.active > .card > *:nth-child(2),#viewCert.active > .card > *:nth-child(2){animation-delay:.17s}
+#viewRate.active > .card > *:nth-child(3),#viewCert.active > .card > *:nth-child(3){animation-delay:.26s}
+#viewRate.active > .card > *:nth-child(4),#viewCert.active > .card > *:nth-child(4){animation-delay:.35s}
+#viewRate.active > .card > *:nth-child(5),#viewCert.active > .card > *:nth-child(5){animation-delay:.44s}
+#viewRate.active > .card > *:nth-child(6),#viewCert.active > .card > *:nth-child(6){animation-delay:.53s}
+#viewRate.active > .card > *:nth-child(7),#viewCert.active > .card > *:nth-child(7){animation-delay:.62s}
+#viewRate.active > .card > *:nth-child(n+8),#viewCert.active > .card > *:nth-child(n+8){animation-delay:.70s}
+
+/* หน้า Intro และหน้าสรุปผลด่าน (#gameRoot > .card:only-child) */
+#gameRoot > .card:only-child{animation:uiFloatUp .60s cubic-bezier(.22,1,.36,1) backwards}
+#gameRoot > .card:only-child > *:not(.stamp){animation:uiFloatUp .65s cubic-bezier(.22,1,.36,1) backwards}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(1){animation-delay:.06s}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(2){animation-delay:.15s}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(3){animation-delay:.24s}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(4){animation-delay:.33s}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(5){animation-delay:.42s}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(6){animation-delay:.51s}
+#gameRoot > .card:only-child > *:not(.stamp):nth-child(n+7){animation-delay:.60s}
+
+/* UI ภายในด่าน (นุ่มนวลแต่ยังคล่องตัว ไม่หน่วงการกด) */
+#gameRoot > .hud{animation:uiFloatUp .42s cubic-bezier(.22,1,.36,1) backwards}
+#gameRoot > .arena-prog,
+#gameRoot > .peek-banner,
+#gameRoot > .hg-wrap{animation:uiFloatUp .44s cubic-bezier(.22,1,.36,1) .06s backwards}
+#gameRoot > #arena.arena,
+#gameRoot > .card-board-full,
+#gameRoot > #s1Legend,
+#gameRoot > .hud + .card,
+#gameRoot > .swipe-stage-full{animation:uiFloatUp .48s cubic-bezier(.22,1,.36,1) .09s backwards}
+#gameRoot .choice-chip:not(.wrong):not(.correct){animation:uiFloatUp .40s cubic-bezier(.22,1,.36,1) backwards}
+#gameRoot .choice-chip:not(.wrong):not(.correct):nth-child(1){animation-delay:.04s}
+#gameRoot .choice-chip:not(.wrong):not(.correct):nth-child(2){animation-delay:.10s}
+#gameRoot .choice-chip:not(.wrong):not(.correct):nth-child(3){animation-delay:.16s}
+#gameRoot .choice-chip:not(.wrong):not(.correct):nth-child(4){animation-delay:.22s}
+
+/* หน้าต่าง Modals */
+.modal.show{animation:uiModalBg .32s ease-out}
+.modal.show .card{animation:uiModalFloat .50s cubic-bezier(.22,1,.36,1)}
+
+@media (prefers-reduced-motion:reduce){
+  .view.active,#viewStart.active .start-wrap > *,#viewStart.active #startBtn,
+  #viewMap.active > header.top,#viewMap.active > .card,
+  #viewRate.active > .card,#viewRate.active > .card > *,
+  #viewCert.active > .card,#viewCert.active > .card > *,
+  #gameRoot > .card:only-child,#gameRoot > .card:only-child > *,
+  #gameRoot > .hud,#gameRoot > .arena-prog,#gameRoot > .peek-banner,#gameRoot > .hg-wrap,
+  #gameRoot > #arena.arena,#gameRoot > .card-board-full,#gameRoot > #s1Legend,
+  #gameRoot > .hud + .card,#gameRoot > .swipe-stage-full,#gameRoot .choice-chip,
+  .modal.show,.modal.show .card{animation:none!important}
+}
+</style>
 <title>WAGHOR AQUA QUEST ภารกิจพิชิตโลกใต้น้ำ · พิพิธภัณฑ์สัตว์น้ำหว้ากอ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1202,6 +1286,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
       <input type="text" id="fbWebsite" name="fb_extra_note" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
     </div>
 
+    <div class="pdpa-note" id="fbPdpaNote">🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น</div>
     <div class="fb-thanks" id="fbThanksBox">✅ บันทึกคะแนนและข้อเสนอแนะเรียบร้อยแล้ว ขอบคุณครับ! 🙏</div>
     <button type="button" class="btn gold full" id="fbSubmitBtn" onclick="submitPlayerFeedback()">🏅 ส่งคะแนนและไปรับเกียรติบัตร ➡️</button>
     <button type="button" class="btn ghost full" id="fbBackMapBtn" style="margin-top:8px" onclick="go('viewMap')">← กลับแผนที่</button>
@@ -1263,6 +1348,7 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
   <h3 id="nmTitle" style="margin-top:0;text-align:center">ยินดีต้อนรับนักสำรวจ!</h3>
   <p id="nmDesc" style="color:var(--muted);margin-top:0">ใส่ชื่อของคุณเพื่อเริ่มต้นสำรวจตั้งแต่ <b>โซนจากขุนเขาสู่สายน้ำ</b> และสะสมตราประทับครบ 7 ด่าน</p>
   <input id="nmName" placeholder="ชื่อเล่น หรือ ชื่อ-นามสกุล">
+  <div class="pdpa-note" id="nmPdpaNote">🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น</div>
   <button class="btn full" id="nmSaveBtn" onclick="saveName()">เริ่มผจญภัย 🌊</button>
 </div></div>
 <!-- ===== โมดัล PIN โหมดเจ้าหน้าที่ (เปิดโดยกดค้างที่โลโก้หน้า 2 หรือหัวข้อหน้าเกียรติบัตร 3 วินาที) ===== -->
@@ -2069,6 +2155,8 @@ function applyStaticLang(){
   setHtml('nmDesc','ใส่ชื่อของคุณเพื่อเริ่มต้นสำรวจตั้งแต่ <b>โซนจากขุนเขาสู่สายน้ำ</b> และสะสมตราประทับครบ 7 ด่าน','Enter your name to begin exploring from the <b>Mountains to Rivers Zone</b> and collect all 7 stamps!');
   const nn=document.getElementById('nmName');if(nn)nn.placeholder=L('ชื่อเล่น หรือ ชื่อ-นามสกุล','Nickname or Full Name');
   setTxt('nmSaveBtn','เริ่มผจญภัย 🌊','Start Adventure 🌊');
+  setHtml('nmPdpaNote','🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น','🔒 <b>Privacy Notice (PDPA):</b> Your name, organization, and score will be used solely to issue your electronic certificate and compile service statistics for Waghor Aquarium.');
+  setHtml('fbPdpaNote','🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น','🔒 <b>Privacy Notice (PDPA):</b> Your name, organization, and score will be used solely to issue your electronic certificate and compile service statistics for Waghor Aquarium.');
 
   setTxt('staffTitle','👩‍🏫 โหมดเจ้าหน้าที่','👩‍🏫 Staff Mode');
   setTxt('staffDesc','ใส่รหัส PIN เพื่อปลดล็อกทุกด่าน หรือจัดการระบบส่งข้อคิดเห็นเข้า Google Sheets','Enter Staff PIN to unlock all stages or open Google Sheets Feedback Summary');
