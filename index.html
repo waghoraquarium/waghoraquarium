@@ -709,19 +709,6 @@ header.top{color:var(--deep)}header.top p{opacity:.85}
 textarea.fb-input{width:100%;padding:12px 13px;border-radius:14px;border:2px solid #cfe6f2;font-size:1rem;font-family:inherit;margin:6px 0 10px;resize:vertical;min-height:84px;user-select:text;background:#fff;color:var(--txt)}
 textarea.fb-input:focus{outline:none;border-color:var(--aqua)}
 .fb-thanks{background:#dff5e8;border:2px solid #2f9a64;color:#14573a;padding:12px 14px;border-radius:14px;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-size:.94rem;font-weight:600;text-align:center;margin:10px 0;display:none}
-.fb-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
-.fb-stat-box{background:#f0f8fb;border:1px solid #c5d9e4;border-radius:14px;padding:10px;text-align:center}
-.fb-stat-box b{display:block;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-size:1.45rem;color:var(--deep)}
-.fb-stat-box small{color:var(--muted);font-size:.82rem;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif}
-.fb-dist{background:#f8fbfd;border:1px solid #d8e9f2;border-radius:12px;padding:8px 12px;margin-bottom:10px;font-size:.82rem;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif}
-.fb-dist-row{display:flex;align-items:center;gap:8px;margin:3px 0}
-.fb-dist-bar{flex:1;height:8px;background:#e2eef5;border-radius:6px;overflow:hidden}
-.fb-dist-bar i{display:block;height:100%;background:linear-gradient(90deg,#f0bf4a,#3a9f6a)}
-.fb-list{display:grid;gap:8px;max-height:36vh;overflow-y:auto;margin:8px 0;padding-right:2px;text-align:left}
-.fb-item{background:#f8fbfd;border:1px solid #cfe2ee;border-left:4px solid #2d7aa6;border-radius:12px;padding:10px 12px;font-size:.92rem;line-height:1.4}
-.fb-item-head{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-size:.84rem;margin-bottom:4px}
-.fb-item-stars{color:#d99b00;font-weight:800}
-.fb-select{width:100%;padding:10px 12px;border-radius:12px;border:2px solid #c5d9e4;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-size:.95rem;font-weight:600;background:#fff;color:var(--txt);margin:4px 0 8px}
 
 .s3-photo-box{display:flex;justify-content:center;align-items:center;margin:0 0 10px;width:100%}
 .s3-photo-box img{width:100%!important;height:auto!important;max-height:36vh;object-fit:contain;border-radius:14px;border:none;box-shadow:none;display:block}
@@ -759,7 +746,7 @@ body.in-stage #s45App{padding-top:10px}
 .pause-lang-box .lang-btn{position:static;height:36px;box-shadow:0 2px 6px rgba(0,30,60,.15);border:1px solid #c5d9e4}
 .wrap{padding:calc(env(safe-area-inset-top, 0px) + 14px) 12px 24px}
 header.top{padding:26px 0 4px}
-#staffLogo{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+#staffLogo{display:inline-flex;align-items:center;justify-content:center}
 #staffLogo img{max-height:84px;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,20,40,.22))}
 .sdec.d1{top:calc(env(safe-area-inset-top, 0px) + 64px);left:6%}
 .sdec.d2{top:calc(env(safe-area-inset-top, 0px) + 68px);right:6%}
@@ -1351,76 +1338,6 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
   <div class="pdpa-note" id="nmPdpaNote">🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น</div>
   <button class="btn full" id="nmSaveBtn" onclick="saveName()">เริ่มผจญภัย 🌊</button>
 </div></div>
-<!-- ===== โมดัล PIN โหมดเจ้าหน้าที่ (เปิดโดยกดค้างที่โลโก้หน้า 2 หรือหัวข้อหน้าเกียรติบัตร 3 วินาที) ===== -->
-<div class="modal" id="staffModal"><div class="card">
-  <h3 id="staffTitle" style="margin-top:0">👩‍🏫 โหมดเจ้าหน้าที่</h3>
-  <p id="staffDesc" style="color:var(--muted);margin-top:0;font-size:.95rem">ใส่รหัส PIN เพื่อปลดล็อกทุกด่าน หรือจัดการระบบส่งข้อคิดเห็นเข้า Google Sheets</p>
-  <input id="staffPin" type="password" inputmode="numeric" maxlength="8" placeholder="••••" style="text-align:center;font-size:1.6rem;letter-spacing:10px">
-  <div class="row" style="margin-bottom:8px">
-    <button class="btn ghost" id="staffCancelBtn" onclick="closeStaffPin()">ยกเลิก</button>
-    <button class="btn" id="staffConfirmBtn" onclick="confirmStaffPin()">ยืนยัน</button>
-  </div>
-  <button class="btn gold full" id="staffOpenReportBtn" onclick="confirmStaffPin('report')">📊 สรุปผลข้อคิดเห็น / ตั้งค่า Google Sheet</button>
-</div></div>
-
-<!-- ===== โมดัลรายงานสรุปผลข้อคิดเห็นประจำเดือน & ตั้งค่า Google Sheets (สำหรับผู้ดูแล) ===== -->
-<div class="modal" id="feedbackReportModal"><div class="card" style="max-width:540px">
-  <h3 id="fbrTitle" style="margin:0 0 4px">📊 ระบบสรุปผลข้อคิดเห็น (Google Sheets)</h3>
-  <p id="fbrSub" style="color:var(--muted);margin:0 0 10px;font-size:.86rem">ส่งข้อมูลจากมือถือผู้เล่นเข้า Google Sheets โดยตรง (ไม่เก็บข้อมูลค้างในเครื่องผู้เล่น)</p>
-
-  <details id="fbrSetupDetails" style="background:#f0f8fb;border:1px solid #bdd8e8;border-radius:12px;padding:10px 12px;margin-bottom:10px">
-    <summary id="fbrSetupSum" style="cursor:pointer;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-weight:700;font-size:.9rem;color:var(--deep)">⚙️ ตั้งค่า URL เชื่อมต่อ Google Sheets & โค้ด Apps Script</summary>
-    <div style="margin-top:8px;font-size:.84rem;line-height:1.45;color:var(--txt)">
-      <label id="fbrWebhookLbl" for="fbrWebhookInput" style="font-weight:700;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;display:block;margin-bottom:2px">🔗 Google Apps Script Web App URL (สำหรับรับ-ส่งข้อมูล):</label>
-      <input id="fbrWebhookInput" placeholder="https://script.google.com/macros/s/.../exec" style="font-size:.85rem;padding:8px 10px;margin:2px 0 8px">
-      <label id="fbrSheetLinkLbl" for="fbrSheetLinkInput" style="font-weight:700;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;display:block;margin-bottom:2px">📗 ลิงก์หน้าตาราง Google Sheet (สำหรับกดเปิดดูตารางโดยตรง):</label>
-      <input id="fbrSheetLinkInput" oninput="syncOpenSheetBtnHref()" placeholder="https://docs.google.com/spreadsheets/d/..." style="font-size:.85rem;padding:8px 10px;margin:2px 0 8px">
-      <label id="fbrTokenLbl" for="fbrTokenInput" style="font-weight:700;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;display:block;margin-bottom:2px">🔑 รหัสลับสำหรับดึงข้อมูล (ADMIN_TOKEN ใน Apps Script):</label>
-      <input id="fbrTokenInput" type="password" autocomplete="off" placeholder="รหัสเดียวกับที่ตั้งในโค้ด Apps Script" style="font-size:.85rem;padding:8px 10px;margin:2px 0 8px">
-      <div class="row" style="margin-bottom:8px">
-        <button type="button" class="btn ok" id="fbrSaveUrlBtn" onclick="saveSheetConfigFromModal()" style="min-height:38px;padding:6px 10px;font-size:.85rem">💾 บันทึกลิงก์</button>
-        <button type="button" class="btn gold" id="fbrCopyScriptBtn" onclick="copyGoogleAppsScriptCode()" style="min-height:38px;padding:6px 10px;font-size:.85rem">📋 คัดลอกโค้ด Apps Script</button>
-      </div>
-      <div id="fbrSetupGuide" style="background:#fff;border:1px dashed #b5d1e2;border-radius:10px;padding:8px 10px;font-size:.8rem;color:var(--muted)">
-        <b>วิธีติดตั้งใน Google Sheet (ทำครั้งเดียว):</b><br>
-        1. สร้างไฟล์ Google Sheet ใหม่ ➔ เมนู <b>ส่วนขยาย (Extensions) &gt; Apps Script</b><br>
-        2. กดปุ่ม <b>📋 คัดลอกโค้ด Apps Script</b> ด้านบน แล้วนำไปวางแทนที่โค้ดเดิมทั้งหมดใน Apps Script กดบันทึก 💾<br>
-        3. กด <b>การทำให้ใช้งานได้ (Deploy) &gt; การทำให้ใช้งานได้รายการใหม่ (New deployment)</b> เลือกประเภท <b>เว็บแอป (Web app)</b> ตั้งค่าผู้มีสิทธิ์เข้าถึงเป็น <b>ทุกคน (Anyone)</b> แล้วคัดลอก URL มาวางในช่องด้านบน (หรือวางในตัวแปร <code>SURVEY_CONFIG.sheetWebhookUrl</code> ในโค้ดเกม)<br>
-        4. <b>ตั้งรหัสลับ:</b> แก้บรรทัด <code>var ADMIN_TOKEN</code> ในโค้ดเป็นรหัสของคุณ (<b>ห้ามเว้นว่าง</b>) แล้วพิมพ์รหัสเดียวกันในช่อง 🔑 ด้านบน (เก็บไว้ในเครื่องเจ้าหน้าที่เท่านั้น)<br>
-        5. <b>ถ้าเคย Deploy ไว้แล้ว:</b> Deploy &gt; Manage deployments &gt; ✏️ แก้ไข &gt; Version เลือก <b>New version</b> &gt; Deploy (URL เดิมไม่เปลี่ยน)
-      </div>
-    </div>
-  </details>
-
-  <div class="row" style="margin-bottom:8px">
-    <button type="button" class="btn" id="fbrFetchCloudBtn" onclick="fetchFeedbackFromSheet()" style="min-height:40px;padding:8px 10px;font-size:.88rem">🔄 ดึงข้อมูลล่าสุดจาก Sheet</button>
-    <a class="btn gold" id="fbrOpenSheetBtn" href="https://docs.google.com/spreadsheets/d/1oc_WGUb8bVB6uBBLKceGwNS31lrfnbzzZtdW0HI23O8/edit?gid=2043458521#gid=2043458521" target="_blank" rel="noopener noreferrer" onclick="return openConnectedGoogleSheet(event)" style="min-height:40px;padding:8px 10px;font-size:.88rem;display:flex;align-items:center;justify-content:center;text-decoration:none;text-align:center">📗 เปิดตาราง Google Sheet ↗</a>
-  </div>
-
-  <label id="fbrMonthLbl" for="fbMonthSelect" style="font-weight:700;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-size:.88rem">📅 เลือกเดือนที่ต้องการสรุปผล:</label>
-  <select class="fb-select" id="fbMonthSelect" onchange="renderFeedbackReport()"></select>
-
-  <div class="fb-stat-grid">
-    <div class="fb-stat-box">
-      <b id="fbrCountVal">0</b>
-      <small id="fbrCountLbl">ผู้ประเมิน (คน)</small>
-    </div>
-    <div class="fb-stat-box">
-      <b id="fbrAvgVal">0.0</b>
-      <small id="fbrAvgLbl">คะแนนเฉลี่ย (เต็ม 5 ดาว)</small>
-    </div>
-  </div>
-
-  <div class="fb-dist" id="fbrDistBox"></div>
-  <div style="font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-weight:700;font-size:.9rem;margin-bottom:4px" id="fbrListHead">💬 รายการข้อเสนอแนะ / ติชมจาก Google Sheet:</div>
-  <div class="fb-list" id="fbrList"></div>
-
-  <div class="row" style="margin-top:10px">
-    <button type="button" class="btn ok" id="fbrExportCsvBtn" onclick="exportFeedbackCSV()">📥 ดาวน์โหลด Excel (.CSV)</button>
-    <button type="button" class="btn gold" id="fbrCopyBtn" onclick="copyFeedbackSummaryText()">📋 คัดลอกสรุป</button>
-  </div>
-  <button type="button" class="btn ghost full" id="fbrCloseBtn" onclick="closeFeedbackReport()" style="margin-top:8px">ปิดหน้าต่าง</button>
-</div></div>
 <!-- ===== โมดัลพักเกม (Pause Modal) ===== -->
 <div class="modal" id="pauseModal"><div class="card" style="text-align:center">
   <img class="waka" data-waka="rest" alt="" style="--ww:104px">
@@ -1683,8 +1600,6 @@ const STAGE_CATALOG={
 function stageCodeOf(id){
   return String(STAGE_CODES[Number(id)]||'');
 }
-function hashCodeStr(str){let h=2166136261;const s=String(str||'');for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)}
-const STAFF_PIN_HASH='14e10s5';
 
 const STAGES_DATA=STAGE_ORDER.map((origId,idx)=>{
   const base=STAGE_CATALOG[origId]||STAGE_CATALOG[1];
@@ -1779,7 +1694,6 @@ function startReveal(gd,card,text,isLast,advance){
   return {refresh};
 }
 function medNote(){return '<div style="margin-top:10px;padding:8px 10px;border-radius:12px;background:#fff0f3;border:2px solid #ff5d73;color:#7a1b2b;font-size:.9rem">'+L('⚠️ <b>ไม่ใช่คำแนะนำทางการแพทย์</b> หากอาการรุนแรง โทร <b>1669</b> ทันที · ใช้น้ำอุ่นที่ทนได้ประมาณ 40–45°C ห้ามร้อนจนลวกผิว และพบแพทย์เสมอหากปวดมากหรือบวมลามขึ้น','⚠️ <b>Not medical advice.</b> For severe symptoms call <b>1669</b> (Thailand emergency medical services) immediately · Use only bearable warm water (about 40–45°C) to avoid scalding, and always see a doctor if pain is severe or swelling spreads.')+'</div>'}
-function isValidStaffPin(v){const pin=String(v||'').trim();return pin==='2411'||hashCodeStr(pin)===STAFF_PIN_HASH}
 
 /* =========================================================================
    3. ระบบบันทึกพาสปอร์ต (localStorage) & กฎการปลดล็อกด้วยรหัส 4 หลัก
@@ -1870,7 +1784,6 @@ function checkSessionExpiry(){
     if((Date.now()-Number(S.updatedAt))>SESSION_TTL_MS){
       safeStorageRemove(KEY);
       S=createDefaultState();
-      staffAuthOk=false;
       curFbStar=0;
       const nmEl=document.getElementById('nmName');if(nmEl)nmEl.value='';
       const cmEl=document.getElementById('fbComment');if(cmEl)cmEl.value='';
@@ -1895,7 +1808,6 @@ function closeResetModal(){
 function confirmResetAll(){
   sfx.tap();
   document.getElementById('resetModal').classList.remove('show');
-  staffAuthOk=false;
   curFbStar=0;
   const nmEl=document.getElementById('nmName');if(nmEl)nmEl.value='';
   const cmEl=document.getElementById('fbComment');if(cmEl)cmEl.value='';
@@ -2129,24 +2041,6 @@ function applyStaticLang(){
   setTxt('fbBackMapBtn','← กลับแผนที่','← Back to Map');
   if(typeof updateFbStarLabel==='function') updateFbStarLabel();
 
-  setTxt('fbrTitle','📊 ระบบสรุปผลข้อคิดเห็น (Google Sheets)','📊 Feedback Summary (Google Sheets)');
-  setTxt('fbrSub','ส่งข้อมูลจากมือถือผู้เล่นเข้า Google Sheets โดยตรง (ไม่เก็บข้อมูลค้างในเครื่องผู้เล่น)','Sends visitor ratings & comments directly to Google Sheets (zero feedback stored on player devices)');
-  setTxt('fbrSetupSum','⚙️ ตั้งค่า URL เชื่อมต่อ Google Sheets & โค้ด Apps Script','⚙️ Google Sheets Webhook Setup & Apps Script Code');
-  setTxt('fbrWebhookLbl','🔗 Google Apps Script Web App URL (สำหรับรับ-ส่งข้อมูล):','🔗 Google Apps Script Web App URL (Webhook):');
-  setTxt('fbrSheetLinkLbl','📗 ลิงก์หน้าตาราง Google Sheet (สำหรับกดเปิดดูตารางโดยตรง):','📗 Google Sheet View URL (Optional direct link):');
-  setTxt('fbrTokenLbl','🔑 รหัสลับสำหรับดึงข้อมูล (ADMIN_TOKEN ใน Apps Script):','🔑 Admin Token (ADMIN_TOKEN in Apps Script):');
-  setTxt('fbrSaveUrlBtn','💾 บันทึกลิงก์','💾 Save URLs');
-  setTxt('fbrCopyScriptBtn','📋 คัดลอกโค้ด Apps Script','📋 Copy Apps Script Code');
-  setTxt('fbrFetchCloudBtn','🔄 ดึงข้อมูลล่าสุดจาก Sheet','🔄 Sync Latest Data from Sheet');
-  setTxt('fbrOpenSheetBtn','📗 เปิดตาราง Google Sheet ↗','📗 Open Google Sheet ↗');
-  setTxt('fbrMonthLbl','📅 เลือกเดือนที่ต้องการสรุปผล:','📅 Select Month to Summarize:');
-  setTxt('fbrCountLbl','ผู้ประเมิน (คน)','Responses');
-  setTxt('fbrAvgLbl','คะแนนเฉลี่ย (เต็ม 5 ดาว)','Average Rating (out of 5)');
-  setTxt('fbrListHead','💬 รายการข้อเสนอแนะ / ติชมจาก Google Sheet:','💬 Visitor Suggestions & Comments from Google Sheet:');
-  setTxt('fbrExportCsvBtn','📥 ดาวน์โหลด Excel (.CSV)','📥 Export Excel (.CSV)');
-  setTxt('fbrCopyBtn','📋 คัดลอกสรุป','📋 Copy Summary');
-  setTxt('fbrCloseBtn','ปิดหน้าต่าง','Close');
-
   setHtml('ulDesc','กรุณากรอก <b>รหัสผ่าน 4 หลัก</b> ที่ติดไว้ ณ ฐานกิจกรรม เพื่อเริ่มทำภารกิจ','Please enter the <b>4-digit code</b> posted at this station to start the stage.');
   setTxt('ulCancelBtn','ยกเลิก','Cancel');
   setTxt('ulSubmitBtn','ปลดล็อกด่าน','Unlock Stage');
@@ -2157,12 +2051,6 @@ function applyStaticLang(){
   setTxt('nmSaveBtn','เริ่มผจญภัย 🌊','Start Adventure 🌊');
   setHtml('nmPdpaNote','🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น','🔒 <b>Privacy Notice (PDPA):</b> Your name, organization, and score will be used solely to issue your electronic certificate and compile service statistics for Waghor Aquarium.');
   setHtml('fbPdpaNote','🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น','🔒 <b>Privacy Notice (PDPA):</b> Your name, organization, and score will be used solely to issue your electronic certificate and compile service statistics for Waghor Aquarium.');
-
-  setTxt('staffTitle','👩‍🏫 โหมดเจ้าหน้าที่','👩‍🏫 Staff Mode');
-  setTxt('staffDesc','ใส่รหัส PIN เพื่อปลดล็อกทุกด่าน หรือจัดการระบบส่งข้อคิดเห็นเข้า Google Sheets','Enter Staff PIN to unlock all stages or open Google Sheets Feedback Summary');
-  setTxt('staffCancelBtn','ยกเลิก','Cancel');
-  setTxt('staffConfirmBtn','ยืนยัน','Confirm');
-  setTxt('staffOpenReportBtn','📊 สรุปผลข้อคิดเห็น / ตั้งค่า Google Sheet','📊 Feedback Summary / Google Sheet Setup');
 
   setTxt('pauseTitle','พักการผจญภัยชั่วคราว','Adventure Paused');
   setTxt('pauseLangLbl','🌐 เปลี่ยนภาษา:','🌐 Language:');
@@ -2192,7 +2080,6 @@ function toggleLang(){
   if(document.getElementById('viewCert').classList.contains('active')) drawCertificate();
   if(document.getElementById('unlockModal').classList.contains('show') && ulId) openUnlock(ulId);
   if(document.getElementById('pauseModal').classList.contains('show')) openPauseModal();
-  if(document.getElementById('feedbackReportModal').classList.contains('show')) renderFeedbackReport();
   if(document.getElementById('viewGame').classList.contains('active')){
     if(G.ended && lastResultArgs){
       G.ended=false;
@@ -2362,7 +2249,7 @@ function renderStart(){
   if(typeof renderInAppModal==='function') renderInAppModal();
 }
 function enterApp(){sfx.tap();go('viewMap');askName()}
-function askName(){if(staffAuthOk)return;if(!S.name)document.getElementById('nameModal').classList.add('show')}
+function askName(){if(!S.name)document.getElementById('nameModal').classList.add('show')}
 function saveName(){
   const n=document.getElementById('nmName').value.trim();
   if(!n)return toast(L('กรุณาใส่ชื่อก่อนนะ','Please enter your name first'));
@@ -2425,45 +2312,6 @@ function unlockStageSuccess(id){
   toast(L(`ปลดล็อกด่านที่ ${id} สำเร็จ! 🎉`,`Stage ${id} Unlocked! 🎉`));
   renderMap();
   startStage(id);
-}
-
-let staffAuthOk=false, staffTargetAction='unlock';
-function openStaffPin(mode='unlock'){
-  staffTargetAction=mode;
-  const i=document.getElementById('staffPin');i.value='';
-  document.getElementById('staffModal').classList.add('show');
-  setTimeout(()=>i.focus(),50);
-}
-function closeStaffPin(){document.getElementById('staffModal').classList.remove('show')}
-function confirmStaffPin(overrideMode){
-  const v=document.getElementById('staffPin').value.trim();
-  const mode=overrideMode||staffTargetAction||'unlock';
-  if(isValidStaffPin(v)){
-    staffAuthOk=true;
-    closeStaffPin();
-    if(mode==='report') openFeedbackReport();
-    else unlockAllForDemo();
-  }else{
-    sfx.bad();toast(L('รหัส PIN ไม่ถูกต้อง','Incorrect Staff PIN'));
-  }
-}
-function unlockAllForDemo(){
-  if(!S.name){
-    S.name=L('เจ้าหน้าที่พิพิธภัณฑ์','Staff Member');
-    const nmInput=document.getElementById('nmName');if(nmInput) nmInput.value=S.name;
-    const certInput=document.getElementById('certName');if(certInput&&!certInput.value) certInput.value=S.name;
-  }
-  const nmModal=document.getElementById('nameModal');
-  if(nmModal) nmModal.classList.remove('show');
-  STAGES_DATA.forEach(s=>{
-    const m=DEFAULT_STAGE_MAX[s.id]||10;
-    Object.assign(S.stages[s.id],{unlocked:true,passed:true,score:m,max:m});
-  });
-  save();sfx.win();renderMap();renderStart();
-  if(document.getElementById('viewStart').classList.contains('active')){
-    go('viewMap');
-  }
-  toast(L('เข้าสู่โหมดเจ้าหน้าที่: ปลดล็อกครบ 7 ด่านพร้อมรับเกียรติบัตรทันที 🎉','Staff Mode: All 7 stages unlocked & ready 🎉'));
 }
 
 /* =========================================================================
@@ -5185,21 +5033,15 @@ async function downloadCertificatePNG(){
    ========================================================================= */
 const SURVEY_CONFIG={
   googleFormUrl:'https://docs.google.com/forms/d/e/1FAIpQLScxEZFPnf8WqMufdo02KUPU1KGzWLXPEEcqFM0GrkAUAtSVGg/viewform?usp=header',
-  // วาง URL ของ Google Apps Script Web App ที่นี่เพื่อให้ผู้เล่นทุกคนส่งข้อมูลเข้า Google Sheet เดียวกันทันที
-  sheetWebhookUrl:'https://script.google.com/macros/s/AKfycbw_sDZzp7wqtU-KOUS4JV4d4jKJmQ5fLNHQHwWmvxGqs02-gDTh94kCnqJz5AOM7dR6/exec',
-  // (ทางเลือก) วางลิงก์หน้าตาราง Google Sheet เพื่อให้ผู้ดูแลกดเปิดตารางจากหน้าสรุปผลได้ทันที
-  sheetViewUrl:'https://docs.google.com/spreadsheets/d/1oc_WGUb8bVB6uBBLKceGwNS31lrfnbzzZtdW0HI23O8/edit?gid=2043458521#gid=2043458521'
+  // วาง URL ของ Google Apps Script Web App ที่นี่เพื่อให้ผู้เล่นทุกคนส่งข้อมูลเข้า Google Sheet เดียวกันทันที (ส่งขาเดียว)
+  sheetWebhookUrl:'https://script.google.com/macros/s/AKfycbw_sDZzp7wqtU-KOUS4JV4d4jKJmQ5fLNHQHwWmvxGqs02-gDTh94kCnqJz5AOM7dR6/exec'
 };
 
 let curFbStar=0;
-let cloudFeedbackCache=[]; // เก็บเฉพาะในหน่วยความจำชั่วคราวเมื่อผู้ดูแลกดดึงข้อมูลจาก Google Sheet เท่านั้น (ไม่ลง localStorage เครื่องผู้เล่น)
 let fbSubmitting=false;
 
 function getActiveWebhookUrl(){
-  return (SURVEY_CONFIG.sheetWebhookUrl || safeStorageGet('wk_admin_webhook_url') || '').trim();
-}
-function getActiveSheetViewUrl(){
-  return (SURVEY_CONFIG.sheetViewUrl || safeStorageGet('wk_admin_sheet_url') || '').trim();
+  return (SURVEY_CONFIG.sheetWebhookUrl || '').trim();
 }
 
 function getStarRatingLabel(v){
@@ -5236,34 +5078,8 @@ function selectFbStar(n){
 
 /* ---------- คิวส่งซ้ำ: เก็บชั่วคราวเฉพาะรายการที่ยังส่งไม่สำเร็จ แล้วลบทิ้งทันทีเมื่อ Sheet ตอบรับ ---------- */
 const FB_QUEUE_KEY='wk_fb_queue_v1';
-const FB_HIST_KEY='wk_fb_history_v1';
 const FB_MAX_COMMENT=500, FB_COOLDOWN_MS=30000, FB_MAX_QUEUE=50;
 let lastFbSentAt=0, fbFlushing=false;
-
-function fbReadHistory(){
-  try{const h=JSON.parse(localStorage.getItem(FB_HIST_KEY)||'[]');return Array.isArray(h)?h:[]}catch(e){return []}
-}
-function fbSaveHistoryItem(entry){
-  try{
-    const h=fbReadHistory().filter(x=>x.id!==entry.id);
-    h.unshift(entry);
-    localStorage.setItem(FB_HIST_KEY,JSON.stringify(h.slice(0,300)));
-  }catch(e){}
-}
-function fbMergeAllItems(){
-  const map=new Map();
-  const keyOf=x=>x.id||`${x.dateStr||''}_${x.name||''}_${x.rating||''}_${x.comment||''}`;
-  cloudFeedbackCache.forEach(x=>map.set(keyOf(x),x));
-  fbReadHistory().forEach(x=>{
-    const k=keyOf(x);
-    if(!map.has(k)){
-      // เช็กซ้ำด้วยเวลา+ชื่อ+ดาว เผื่อ Sheet ไม่ได้คืนคอลัมน์ id ในสคริปต์รุ่นเก่า
-      const dup=cloudFeedbackCache.some(c=>c.dateStr===x.dateStr && c.name===x.name && +c.rating===+x.rating);
-      if(!dup) map.set(k,x);
-    }
-  });
-  return [...map.values()];
-}
 
 function fbReadQueue(){
   try{const q=JSON.parse(localStorage.getItem(FB_QUEUE_KEY)||'[]');return Array.isArray(q)?q:[]}catch(e){return []}
@@ -5376,8 +5192,7 @@ async function submitPlayerFeedback(){
     btn.textContent=L('⏳ กำลังบันทึกคะแนนและเปิดหน้าเกียรติบัตร...','⏳ Saving rating & opening certificate...');
   }
 
-  // บันทึกลงประวัติในเครื่องและคิวส่งข้อมูล เพื่อให้หน้ากราฟแสดงผลได้ทันทีแม้สคริปต์ฝั่ง Sheet ยังไม่ได้อัปเดตเวอร์ชัน
-  fbSaveHistoryItem(entry);
+  // เพิ่มเข้าคิวส่งข้อมูลเข้า Google Sheet ขาเดียว
   const q=fbReadQueue();q.push(entry);fbWriteQueue(q);
   fbPostEntry(entry).then(ok=>{
     if(ok){
@@ -5397,532 +5212,6 @@ async function submitPlayerFeedback(){
   toast(L('ขอบคุณสำหรับคะแนนความพึงพอใจครับ! เชิญรับเกียรติบัตรได้เลย 🏅','Thank you for rating! Here is your certificate 🏅'));
   go('viewCert');
 }
-
-function normMonth(m, ts, dateStr){
-  let s=String(m||'').trim();
-  let match = s.match(/^(\d{4})[-/.](\d{1,2})/);
-  if(match){
-    let y=+match[1], mo=String(+match[2]).padStart(2,'0');
-    if(y>2400) y-=543; // แปลง พ.ศ. เป็น ค.ศ.
-    return `${y}-${mo}`;
-  }
-  // ถ้าไม่มี month ลองแกะจาก dateStr หรือ ts
-  const str = String(dateStr||ts||'');
-  match = str.match(/^(\d{4})[-/.](\d{1,2})/);
-  if(match){
-    let y=+match[1], mo=String(+match[2]).padStart(2,'0');
-    if(y>2400) y-=543;
-    return `${y}-${mo}`;
-  }
-  const now=new Date();
-  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-}
-
-function formatMonthName(ym){
-  if(ym==='all') return L('📊 ทุกเดือนรวมกัน','📊 All Months');
-  const [y,m]=ym.split('-').map(Number);
-  if(!y||!m) return ym;
-  const d=new Date(y,m-1,1);
-  const label=d.toLocaleDateString(LANG==='en'?'en-US':'th-TH',{month:'long',year:'numeric'});
-  return `${label} (${ym})`;
-}
-
-function syncOpenSheetBtnHref(){
-  const btn=document.getElementById('fbrOpenSheetBtn');
-  if(!btn) return '';
-  const si=document.getElementById('fbrSheetLinkInput');
-  const sVal=si&&si.value ? si.value.trim() : '';
-  const url=sVal || getActiveSheetViewUrl();
-  btn.href=url || '#';
-  return url;
-}
-
-function openFeedbackReport(){
-  const wi=document.getElementById('fbrWebhookInput');
-  const si=document.getElementById('fbrSheetLinkInput');
-  if(wi) wi.value=getActiveWebhookUrl();
-  if(si) si.value=getActiveSheetViewUrl();
-  syncOpenSheetBtnHref();
-  const ti=document.getElementById('fbrTokenInput');
-  if(ti) ti.value=safeStorageGet('wk_admin_token')||'';
-  const det=document.getElementById('fbrSetupDetails');
-  if(det) det.open=!getActiveWebhookUrl();
-
-  populateFeedbackMonths();
-  renderFeedbackReport();
-  document.getElementById('feedbackReportModal').classList.add('show');
-  if(getActiveWebhookUrl()){
-    fetchFeedbackFromSheet(true);
-  }
-}
-
-function populateFeedbackMonths(){
-  const sel=document.getElementById('fbMonthSelect');
-  const all=fbMergeAllItems();
-  const monthsSet=new Set();
-  all.forEach(x=>{
-    const m=normMonth(x.month, x.ts, x.dateStr);
-    x.month=m;
-    if(m) monthsSet.add(m);
-  });
-  const now=new Date();
-  const curYm=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-  if(!monthsSet.size) monthsSet.add(curYm);
-  const months=[...monthsSet].sort().reverse();
-  if(sel){
-    const prevVal=sel.value;
-    // นำตัวเลือก 'all' (ทุกเดือนรวมกัน) ขึ้นเป็นอันดับแรกเสมอ เพื่อให้เปิดดูข้อมูลทั้งหมดได้ทันที!
-    sel.innerHTML=`<option value="all">${formatMonthName('all')}</option>`+months.map(m=>`<option value="${m}">${formatMonthName(m)}</option>`).join('');
-    if(prevVal && (months.includes(prevVal)||prevVal==='all')) sel.value=prevVal;
-    else sel.value='all'; // ค่าเริ่มต้นเลือก "ทุกเดือนรวมกัน"
-  }
-}
-
-function closeFeedbackReport(){
-  sfx.tap();
-  document.getElementById('feedbackReportModal').classList.remove('show');
-}
-
-function saveSheetConfigFromModal(){
-  const wi=document.getElementById('fbrWebhookInput');
-  const si=document.getElementById('fbrSheetLinkInput');
-  const wVal=(wi?wi.value:'').trim();
-  const sVal=(si?si.value:'').trim();
-  const tEl=document.getElementById('fbrTokenInput');
-  const tVal=(tEl?tEl.value:'').trim();
-  SURVEY_CONFIG.sheetWebhookUrl=wVal;
-  SURVEY_CONFIG.sheetViewUrl=sVal;
-  try{
-    safeStorageSet('wk_admin_webhook_url',wVal);
-    safeStorageSet('wk_admin_sheet_url',sVal);
-    safeStorageSet('wk_admin_token',tVal);
-  }catch(e){}
-  syncOpenSheetBtnHref();
-  sfx.ok();
-  toast(L('บันทึกลิงก์เชื่อมต่อ Google Sheet แล้ว 💾','Google Sheet URLs saved 💾'));
-  if(wVal) fetchFeedbackFromSheet();
-}
-
-function copySheetLinkFallback(url){
-  const notify=()=>{
-    sfx.ok();
-    toast(L('คัดลอกลิงก์แล้ว วางในเบราว์เซอร์ได้เลย','Link copied! Paste it in your browser'));
-  };
-  const fallback=()=>{
-    const ta=document.createElement('textarea');
-    ta.value=url;ta.style.position='fixed';ta.style.opacity='0';
-    document.body.appendChild(ta);ta.select();
-    try{document.execCommand('copy');}catch(err){}
-    ta.remove();
-    notify();
-  };
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(url).then(notify).catch(fallback);
-  }else{
-    fallback();
-  }
-}
-
-function openConnectedGoogleSheet(e){
-  if(e) e.preventDefault();
-  const url=syncOpenSheetBtnHref();
-  if(!url){
-    sfx.bad();
-    const det=document.getElementById('fbrSetupDetails');
-    if(det) det.open=true;
-    toast(L('กรุณาวางลิงก์หน้าตาราง Google Sheet ในช่องตั้งค่า','Please set your Google Sheet URL in the setup box first'));
-    return false;
-  }
-  let win=null;
-  try{
-    win=window.open(url,'_blank');
-    if(win){
-      try{win.opener=null;}catch(_){}
-    }
-  }catch(_){}
-  if(!win){
-    copySheetLinkFallback(url);
-  }
-  return false;
-}
-
-async function fetchFeedbackFromSheet(silent=false){
-  const webhook=getActiveWebhookUrl();
-  if(!webhook){
-    if(!silent){
-      sfx.bad();
-      const det=document.getElementById('fbrSetupDetails');
-      if(det) det.open=true;
-      toast(L('กรุณาตั้งค่า Google Apps Script Web App URL ก่อน','Please configure the Google Apps Script Web App URL first'));
-    }
-    return;
-  }
-  const btn=document.getElementById('fbrFetchCloudBtn');
-  if(btn){
-    btn.disabled=true;
-    btn.textContent=L('⏳ กำลังดึงข้อมูลจาก Sheet...','⏳ Loading from Sheet...');
-  }
-  try{
-    const rawTok=(safeStorageGet('wk_admin_token')||'').trim();
-    const tok=encodeURIComponent(rawTok);
-    let data=null;
-    // 1) ลองดึงผ่าน GET แบบไม่ส่งคุกกี้ (แก้บั๊กล็อกอินหลายบัญชี Google แล้วขึ้น "ไม่สามารถเปิดไฟล์ได้ในเวลานี้")
-    try{
-      const res=await fetch(webhook+(webhook.includes('?')?'&':'?')+'action=list&token='+tok+'&t='+Date.now(),{
-        method:'GET',
-        credentials:'omit',
-        redirect:'follow'
-      });
-      data=await res.json();
-    }catch(e1){
-      // 2) หาก GET ติดบล็อก ให้ลองส่งผ่าน POST (action: 'list') แทน เพราะ POST ทำงานผ่านได้แล้ว
-      try{
-        const res2=await fetch(webhook,{
-          method:'POST',
-          credentials:'omit',
-          redirect:'follow',
-          headers:{'Content-Type':'text/plain;charset=utf-8'},
-          body:JSON.stringify({action:'list',token:rawTok})
-        });
-        data=await res2.json();
-      }catch(e2){}
-    }
-    if(data&&(data.error==='unauthorized'||data.error==='token_not_set')){
-      populateFeedbackMonths();
-      renderFeedbackReport();
-      if(!silent){
-        sfx.bad();
-        const det=document.getElementById('fbrSetupDetails');
-        if(det) det.open=true;
-        toast(data.error==='token_not_set'
-          ? L('ใน Apps Script ยังไม่ได้ตั้งรหัส ADMIN_TOKEN (หรือคัดลอกโค้ดใหม่ไปวางแล้ว Deploy > New version)','Please update Apps Script code and Deploy > New version')
-          : L('รหัสลับ 🔑 ไม่ตรงกับ ADMIN_TOKEN ใน Apps Script','Admin token 🔑 does not match ADMIN_TOKEN in Apps Script'));
-      }
-      return;
-    }
-    const items = Array.isArray(data&&data.items) ? data.items : (Array.isArray(data&&data.data) ? data.data : (Array.isArray(data) ? data : null));
-    if(items){
-      cloudFeedbackCache=items;
-      populateFeedbackMonths();
-      renderFeedbackReport();
-      if(!silent){
-        sfx.ok();
-        const totalMerged=fbMergeAllItems().length;
-        toast(L(`ดึงข้อมูลสำเร็จ (${totalMerged} รายการ) 📊`,`Synced ${totalMerged} entries 📊`));
-      }
-    }else{
-      populateFeedbackMonths();
-      renderFeedbackReport();
-      if(!silent){
-        const localCnt=fbReadHistory().length;
-        if(localCnt>0){
-          toast(L(`แสดงข้อมูลในเครื่อง ${localCnt} รายการ (หากต้องการดึงจากเครื่องอื่น ให้คัดลอกโค้ด Apps Script ใหม่ไป Deploy > New version)`,`Showing ${localCnt} local entries`));
-        }else{
-          toast(L('ยังไม่มีรายการส่งกลับจาก Sheet (ตรวจสอบว่ากด Deploy > New version ใน Apps Script แล้ว)','No list returned from Sheet yet (ensure Apps Script is deployed as New version)'));
-        }
-      }
-    }
-  }catch(err){
-    populateFeedbackMonths();
-    renderFeedbackReport();
-    if(!silent){
-      sfx.bad();
-      toast(L('ไม่สามารถดึงข้อมูลจาก Sheet ได้ กรุณาตรวจสอบสิทธิ์ Web App (Anyone)','Could not fetch data. Check Web App access (Anyone).'));
-    }
-  }finally{
-    if(btn){
-      btn.disabled=false;
-      btn.textContent=L('🔄 ดึงข้อมูลล่าสุดจาก Sheet','🔄 Sync Latest Data from Sheet');
-    }
-  }
-}
-
-function getFilteredFeedback(){
-  const sel=document.getElementById('fbMonthSelect');
-  const ym=sel?sel.value:'all';
-  const all=fbMergeAllItems();
-  all.forEach(x=>{ x.month = normMonth(x.month, x.ts, x.dateStr); });
-  return ym==='all' ? all : all.filter(x=>x.month===ym);
-}
-
-function renderFeedbackReport(){
-  const sel=document.getElementById('fbMonthSelect');
-  if(sel){
-    [...sel.options].forEach(opt=>{opt.textContent=formatMonthName(opt.value)});
-  }
-  const items=getFilteredFeedback();
-  const cnt=items.length;
-  const avg=cnt ? (items.reduce((a,x)=>a+(+x.rating||0),0)/cnt).toFixed(2) : '0.00';
-  const cEl=document.getElementById('fbrCountVal');if(cEl)cEl.textContent=cnt;
-  const aEl=document.getElementById('fbrAvgVal');if(aEl)aEl.textContent=`⭐ ${avg}`;
-
-  const distBox=document.getElementById('fbrDistBox');
-  if(distBox){
-    distBox.innerHTML=[5,4,3,2,1].map(star=>{
-      const n=items.filter(x=>+x.rating===star).length;
-      const pct=cnt?Math.round((n/cnt)*100):0;
-      return `<div class="fb-dist-row"><span style="width:42px">${star} ⭐</span><div class="fb-dist-bar"><i style="width:${pct}%"></i></div><span style="width:68px;text-align:right">${n} (${pct}%)</span></div>`;
-    }).join('');
-  }
-
-  const listEl=document.getElementById('fbrList');
-  if(listEl){
-    if(!cnt){
-      const hasUrl=!!getActiveWebhookUrl();
-      listEl.innerHTML=`<div style="text-align:center;color:var(--muted);padding:16px 8px;font-family:Prompt,Sarabun,Thonburi,Tahoma,sans-serif;font-size:.88rem">${
-        hasUrl
-          ? L('กดปุ่ม "🔄 ดึงข้อมูลล่าสุดจาก Sheet" เพื่อโหลดข้อมูลรายเดือน หรือเปิดดูในตาราง Google Sheet โดยตรง','Tap "🔄 Sync Latest Data from Sheet" to load monthly entries, or open the Google Sheet directly.')
-          : L('ยังไม่ได้ตั้งค่าลิงก์ Google Apps Script Web App URL (ดูวิธีติดตั้งในหัวข้อ ⚙️ ด้านบน)','Google Apps Script Web App URL is not configured yet (see ⚙️ setup instructions above).')
-      }</div>`;
-    }else{
-      const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-      listEl.innerHTML=items.map(it=>`
-        <div class="fb-item">
-          <div class="fb-item-head">
-            <span class="fb-item-stars">${'⭐'.repeat(Math.max(1,Math.min(5,+it.rating||5)))} (${it.rating}/5)</span>
-            <span style="color:var(--muted)">${esc(it.dateStr||'')}</span>
-          </div>
-          <div style="font-weight:700;color:var(--deep);font-size:.88rem;margin-bottom:2px">
-            👤 ${esc(it.name||'-')}${it.school?` · 🏫 ${esc(it.school)}`:''} · 🎯 ${L('คะแนนเกม','Score')}: ${it.score||0}
-          </div>
-          <div style="color:var(--txt)">${it.comment?esc(it.comment):`<i style="color:var(--muted)">${L('(ให้คะแนนดาวโดยไม่ระบุข้อความ)','(Rated without written comment)')}</i>`}</div>
-        </div>
-      `).join('');
-    }
-  }
-}
-
-function exportFeedbackCSV(){
-  const items=getFilteredFeedback();
-  if(!items.length){
-    sfx.bad();
-    return toast(L('กรุณากดดึงข้อมูลจาก Google Sheet ก่อนส่งออกไฟล์ .CSV','Please sync data from Google Sheet before exporting .CSV'));
-  }
-  const sel=document.getElementById('fbMonthSelect');
-  const ym=sel?sel.value:'all';
-  const csvEsc=v=>`"${String(v??'').replace(/"/g,'""')}"`;
-  const headers=LANG==='en'
-    ? ['Date-Time','Month','Explorer Name','School/Organization','Game Score','Satisfaction Rating (1-5)','Suggestions & Feedback']
-    : ['วันที่-เวลา','เดือน','ชื่อ-นามสกุล','โรงเรียน/หน่วยงาน','คะแนนรวมในเกม','ความพึงพอใจ (1-5 ดาว)','ข้อเสนอแนะ/ติชม'];
-  const rows=items.map(it=>[
-    it.dateStr||'',
-    it.month||'',
-    it.name||'',
-    it.school||'',
-    it.score??0,
-    it.rating??5,
-    it.comment||''
-  ].map(csvEsc).join(','));
-  const avg=(items.reduce((a,x)=>a+(+x.rating||0),0)/items.length).toFixed(2);
-  const summaryRow=[
-    csvEsc(L('สรุปค่าเฉลี่ย','Summary Average')),
-    csvEsc(ym),
-    csvEsc(L(`ผู้ประเมินรวม ${items.length} คน`,`Total ${items.length} responses`)),
-    csvEsc(''),
-    csvEsc(''),
-    csvEsc(avg),
-    csvEsc('')
-  ].join(',');
-  const csvContent='﻿'+[headers.map(csvEsc).join(','),...rows,'',summaryRow].join('\n');
-  const blob=new Blob([csvContent],{type:'text/csv;charset=utf-8;'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download=`waghor-feedback-${ym}.csv`;
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
-  sfx.ok();
-  toast(L('ดาวน์โหลดไฟล์สรุปผล .CSV เรียบร้อยแล้ว 📥','Monthly report .CSV downloaded 📥'));
-}
-
-function copyFeedbackSummaryText(){
-  const items=getFilteredFeedback();
-  if(!items.length){
-    sfx.bad();
-    return toast(L('กรุณากดดึงข้อมูลจาก Google Sheet ก่อนคัดลอกสรุป','Please sync data from Google Sheet first'));
-  }
-  const sel=document.getElementById('fbMonthSelect');
-  const ym=sel?sel.value:'all';
-  const avg=(items.reduce((a,x)=>a+(+x.rating||0),0)/items.length).toFixed(2);
-  const comments=items.filter(x=>x.comment).map((x,i)=>`${i+1}. [${x.rating}⭐] ${x.comment} (${x.name})`).join('\n');
-  const text=LANG==='en'
-    ? `📊 WAGHOR AQUA QUEST: Underwater Adventure — Feedback Summary (${formatMonthName(ym)})
-• Total Responses: ${items.length}
-• Average Rating: ${avg} / 5.00 ⭐
-• Comments:
-${comments||'(No written comments)'}`
-    : `📊 สรุปผลความพึงพอใจและข้อเสนอแนะ WAGHOR AQUA QUEST ภารกิจพิชิตโลกใต้น้ำ (${formatMonthName(ym)})
-• จำนวนผู้ประเมิน: ${items.length} คน
-• คะแนนเฉลี่ย: ${avg} / 5.00 ⭐
-• ข้อเสนอแนะ/ติชม:
-${comments||'(ไม่มีข้อความเสนอแนะเพิ่มเติม)'}`;
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(()=>{sfx.ok();toast(L('คัดลอกสรุปรายงานแล้ว 📋','Summary copied to clipboard 📋'))}).catch(()=>fallbackCopy(text));
-  }else{
-    fallbackCopy(text);
-  }
-}
-
-function copyGoogleAppsScriptCode(){
-  const scriptCode = [
-    "// === โค้ด Google Apps Script สำหรับรับคะแนน 1-5 ดาว และข้อเสนอแนะจากเกมพาสปอร์ตนักสำรวจ 7 ด่าน (เวอร์ชันมีรหัสลับ + กันข้อมูลซ้ำ + จำกัดความถี่) ===",
-    "// วิธีใช้: เปิด Google Sheet > ส่วนขยาย (Extensions) > Apps Script > วางโค้ดนี้แทนของเดิมทั้งหมด > บันทึก",
-    "// ถ้าเคย Deploy แล้ว: Deploy > Manage deployments > ✏️ แก้ไข > Version: New version > Deploy (URL เดิมไม่เปลี่ยน)",
-    "// ถ้ายังไม่เคย: Deploy > New deployment > Web app > ผู้มีสิทธิ์เข้าถึง: Anyone",
-    "",
-    "// *** ต้องตั้งรหัสลับของคุณเองที่บรรทัดด้านล่าง (ห้ามเว้นว่าง และไม่ควรใช้รหัสเดียวกับโหมดเจ้าหน้าที่) แล้วพิมพ์รหัสเดียวกันในช่อง 🔑 ของหน้าสรุปผล ***",
-    "var ADMIN_TOKEN = ''; // <-- ใส่รหัสลับของคุณเองในเครื่องหมายคำพูด",
-    "",
-    "function json_(o) {",
-    "  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);",
-    "}",
-    "",
-    "// ตัดความยาว และกันข้อความที่ขึ้นต้นด้วย = + - @ ถูกตีเป็นสูตรใน Google Sheets",
-    "function clean_(v, maxLen) {",
-    "  var s = String(v == null ? '' : v).slice(0, maxLen);",
-    "  if (/^[=+\\-@\\t\\r]/.test(s)) s = \"'\" + s;",
-    "  return s;",
-    "}",
-    "",
-    "function monthOf_(v) {",
-    "  if (v instanceof Date) return Utilities.formatDate(v, 'GMT+7', 'yyyy-MM');",
-    "  return String(v || '');",
-    "}",
-    "",
-    "function dateOf_(v) {",
-    "  if (v instanceof Date) return Utilities.formatDate(v, 'GMT+7', 'yyyy-MM-dd HH:mm');",
-    "  return String(v || '');",
-    "}",
-    "",
-    "function listResponses_(token) {",
-    "  if (!ADMIN_TOKEN) return json_({error: 'token_not_set'});",
-    "  if (token !== ADMIN_TOKEN) return json_({error: 'unauthorized'});",
-    "  var ss = SpreadsheetApp.getActiveSpreadsheet();",
-    "  var sheet = ss.getSheetByName('Responses') || ss.getSheets()[0];",
-    "  if (!sheet || sheet.getLastRow() <= 1) return json_({items: []});",
-    "  var rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 8).getValues();",
-    "  var items = rows.reverse().map(function(r) {",
-    "    return {",
-    "      dateStr: dateOf_(r[0]),",
-    "      month: monthOf_(r[1]),",
-    "      name: String(r[2] || ''),",
-    "      school: String(r[3] || ''),",
-    "      score: Number(r[4] || 0),",
-    "      rating: Number(r[5] || 5),",
-    "      comment: String(r[6] || ''),",
-    "      lang: String(r[7] || 'th')",
-    "    };",
-    "  });",
-    "  return json_({items: items});",
-    "}",
-    "",
-    "function doPost(e) {",
-    "  var lock = LockService.getScriptLock();",
-    "  lock.tryLock(10000);",
-    "  try {",
-    "    var data = JSON.parse(e.postData.contents);",
-    "    if (data && data.action === 'list') return listResponses_(String(data.token || ''));",
-    "    var ss = SpreadsheetApp.getActiveSpreadsheet();",
-    "    var sheet = ss.getSheetByName('Responses');",
-    "    if (!sheet) {",
-    "      sheet = ss.insertSheet('Responses');",
-    "      sheet.appendRow(['วันที่-เวลา', 'เดือน (YYYY-MM)', 'ชื่อ-นามสกุล', 'โรงเรียน/หน่วยงาน', 'คะแนนรวมในเกม', 'ความพึงพอใจ (1-5 ดาว)', 'ข้อเสนอแนะ/ติชม', 'ภาษา', 'รหัสรายการ']);",
-    "      sheet.getRange(1, 1, 1, 9).setFontWeight('bold').setBackground('#d9edf7');",
-    "    } else if (!sheet.getRange(1, 9).getValue()) {",
-    "      sheet.getRange(1, 9).setValue('รหัสรายการ').setFontWeight('bold').setBackground('#d9edf7');",
-    "    }",
-    "    var id = String(data.id || '').slice(0, 40);",
-    "    if (id && sheet.getLastRow() > 1) {",
-    "      var ids = sheet.getRange(2, 9, sheet.getLastRow() - 1, 1).getValues();",
-    "      for (var i = 0; i < ids.length; i++) {",
-    "        if (String(ids[i][0]) === id) return json_({status: 'duplicate'});",
-    "      }",
-    "    }",
-    "    // กันสแปม: จำกัดรายการใหม่ไม่เกิน 40 รายการ/นาที รวมทั้งระบบ (เกมจะเก็บในคิวแล้วส่งใหม่เองภายหลัง)",
-    "    var cache = CacheService.getScriptCache();",
-    "    var rateKey = 'rate_' + Math.floor(Date.now() / 60000);",
-    "    var rateCnt = Number(cache.get(rateKey) || 0);",
-    "    if (rateCnt >= 40) return json_({status: 'busy'});",
-    "    cache.put(rateKey, String(rateCnt + 1), 120);",
-    "    var rating = Math.min(5, Math.max(1, Number(data.rating || 5)));",
-    "    sheet.appendRow([",
-    "      clean_(data.dateStr, 20) || Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM-dd HH:mm'),",
-    "      clean_(data.month, 7) || Utilities.formatDate(new Date(), 'GMT+7', 'yyyy-MM'),",
-    "      clean_(data.name, 100) || '-',",
-    "      clean_(data.school, 150) || '-',",
-    "      Number(data.score || 0),",
-    "      rating,",
-    "      clean_(data.comment, 500),",
-    "      data.lang === 'en' ? 'en' : 'th',",
-    "      id",
-    "    ]);",
-    "    updateMonthlySummarySheet(ss);",
-    "    return json_({status: 'ok'});",
-    "  } catch (err) {",
-    "    return json_({status: 'error', message: err.toString()});",
-    "  } finally {",
-    "    lock.releaseLock();",
-    "  }",
-    "}",
-    "",
-    "function doGet(e) {",
-    "  var p = (e && e.parameter) || {};",
-    "  if (p.action !== 'list') return json_({status: 'ready'});",
-    "  return listResponses_(String(p.token || ''));",
-    "}",
-    "",
-    "function updateMonthlySummarySheet(ss) {",
-    "  var resSheet = ss.getSheetByName('Responses');",
-    "  if (!resSheet || resSheet.getLastRow() <= 1) return;",
-    "  var sumSheet = ss.getSheetByName('Monthly_Summary') || ss.insertSheet('Monthly_Summary');",
-    "  sumSheet.clearContents();",
-    "  sumSheet.appendRow(['เดือน (YYYY-MM)', 'จำนวนผู้ประเมิน (คน)', 'คะแนนเฉลี่ย (เต็ม 5)', '5 ดาว', '4 ดาว', '3 ดาว', '2 ดาว', '1 ดาว']);",
-    "  sumSheet.getRange(1, 1, 1, 8).setFontWeight('bold').setBackground('#fcf8e3');",
-    "  var rows = resSheet.getRange(2, 1, resSheet.getLastRow() - 1, 8).getValues();",
-    "  var map = {};",
-    "  rows.forEach(function(r) {",
-    "    var m = monthOf_(r[1]) || 'ไม่ระบุ';",
-    "    var star = Math.min(5, Math.max(1, Number(r[5] || 5)));",
-    "    if (!map[m]) map[m] = {count: 0, sum: 0, stars: {1:0, 2:0, 3:0, 4:0, 5:0}};",
-    "    map[m].count++;",
-    "    map[m].sum += star;",
-    "    map[m].stars[star] = (map[m].stars[star] || 0) + 1;",
-    "  });",
-    "  Object.keys(map).sort().reverse().forEach(function(m) {",
-    "    var d = map[m];",
-    "    var avg = (d.sum / d.count).toFixed(2);",
-    "    sumSheet.appendRow([\"'\" + m, d.count, Number(avg), d.stars[5], d.stars[4], d.stars[3], d.stars[2], d.stars[1]]);",
-    "  });",
-    "}"
-  ].join('\n');
-
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(scriptCode).then(()=>{sfx.ok();toast(L('คัดลอกโค้ด Google Apps Script แล้ว! นำไปวางใน Google Sheet ได้เลย 📋','Google Apps Script code copied! Paste it in Extensions > Apps Script 📋'))}).catch(()=>fallbackCopy(scriptCode));
-  }else{
-    fallbackCopy(scriptCode);
-  }
-}
-
-function fallbackCopy(text){
-  const ta=document.createElement('textarea');
-  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
-  document.body.appendChild(ta);ta.select();
-  try{document.execCommand('copy');sfx.ok();toast(L('คัดลอกข้อความเรียบร้อยแล้ว 📋','Copied to clipboard 📋'))}catch(e){}
-  ta.remove();
-}
-
-// ทางเข้าลับสำหรับผู้ดูแลในหน้าเกียรติบัตร (กดค้าง 3 วินาทีที่หัวข้อเกียรติบัตร หรือหัวข้อแบบสอบถาม เหมือนโลโก้ในหน้าที่ 2)
-(function(){
-  ['certHeading','fbHeading'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el) return;
-    let t=null;
-    const stop=()=>clearTimeout(t);
-    el.addEventListener('pointerdown',()=>{stop();t=setTimeout(()=>openStaffPin('report'),3000)});
-    ['pointerup','pointerleave','pointercancel'].forEach(ev=>el.addEventListener(ev,stop));
-    el.addEventListener('contextmenu',e=>e.preventDefault());
-  });
-})();
 
 /* ตราประทับกระแทกลงพาสปอร์ตเมื่อผ่านด่าน */
 (function(){
@@ -6003,21 +5292,6 @@ window.addEventListener('beforeunload',e=>{
   }
 });
 document.getElementById('ulCode').addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock()});
-document.getElementById('staffPin').addEventListener('keydown',e=>{if(e.key==='Enter')confirmStaffPin()});
-(function(){
-  ['staffLogo','startLogo'].forEach(id=>{{
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.style.userSelect='none';
-    el.style.webkitUserSelect='none';
-    let t=null;
-    const stop=()=>clearTimeout(t);
-    el.addEventListener('pointerdown',()=>{stop();t=setTimeout(openStaffPin,3000)});
-    ['pointerup','pointerleave','pointercancel'].forEach(ev=>el.addEventListener(ev,stop));
-    el.addEventListener('contextmenu',e=>e.preventDefault());
-  }});
-})();
-
 (function(){
   const ua=navigator.userAgent||'';
   const isInApp=/Line\/|FBAN|FBAV|FB_IAB|Instagram|BytedanceWebview|Musical_ly|TikTok|MicroMessenger|Twitter|Snapchat|KAKAOTALK|Zalo/i.test(ua);
