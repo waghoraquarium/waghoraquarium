@@ -87,6 +87,99 @@
   #gameRoot > .hud + .card,#gameRoot > .swipe-stage-full,#gameRoot .choice-chip,
   .modal.show,.modal.show .card{animation:none!important}
 }
+/* ===== In-Game QR Scanner (#unlockModal) ===== */
+.qr-tools{margin:0 0 12px}
+.qr-btn-row{display:flex;gap:8px;margin-bottom:8px}
+.qr-btn-row .btn{flex:1;min-height:42px;padding:8px 10px;font-size:.88rem}
+.qr-scan-wrap{display:none;position:relative;width:100%;max-width:260px;aspect-ratio:1/1;margin:0 auto 8px;border-radius:16px;overflow:hidden;background:#061b2e;border:3px solid var(--aqua);box-shadow:0 8px 20px rgba(6,42,74,.28)}
+.qr-scan-wrap.on{display:block}
+.qr-scan-wrap video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.qr-reticle{position:absolute;inset:16%;border:2.5px dashed rgba(255,255,255,.85);border-radius:14px;pointer-events:none;box-shadow:0 0 0 999px rgba(6,27,46,.32)}
+.qr-status{font-size:.82rem;color:var(--ocean);min-height:18px;margin:0 0 8px;font-weight:600}
+.qr-or-lbl{font-size:.8rem;color:var(--muted);margin:4px 0 6px;display:flex;align-items:center;gap:8px}
+.qr-or-lbl::before,.qr-or-lbl::after{content:"";flex:1;height:1px;background:#d2e6f2}
+
+/* ===== Phase Upgrade (Items 1, 2, 4): Touch Targets, Low-Light Contrast & Living Motion ===== */
+/* 1. Touch & Responsive Safety */
+.btn,.choice-chip,.s45-seg button,.fb-star{touch-action:manipulation}
+#hudPauseBtn,#hudExitBtn,#s2HintBtn{min-height:38px!important;padding:6px 12px!important;font-size:.86rem!important}
+.choice-chip{min-height:52px}
+.stage{min-height:74px}
+.fact,.fact-item,.stage h3,.stage small,.card p{overflow-wrap:break-word;word-break:break-word}
+.modal .card{padding-bottom:calc(18px + env(safe-area-inset-bottom, 0px))}
+
+/* 2. Aquarium Low-Light Readability & Contrast */
+:root{--muted:#445c70;--txt:#152c3f}
+.stage.locked{opacity:.88}
+.stage.locked .badge{background:#dce6ee;color:#395062}
+.fact{background:#e7f4fa;border-left-width:6px;color:#152c3f}
+.fact-item{background:#eef8f2;border-left-width:5px;padding:11px 13px;box-shadow:0 2px 6px rgba(15,45,65,.06)}
+.fact-item.wrong{background:#fdf0f2}
+.fact-item b{font-size:.98rem;margin-bottom:3px}
+.pdpa-note{color:#3d5568;background:#e9f4fa}
+
+/* 4. Living Idle Motion (Mascot Waka & Marine Life) */
+@keyframes wakaBreathe{
+  0%,100%{transform:translateY(0) scale(1,1) rotate(-1.2deg)}
+  50%{transform:translateY(-6px) scale(1.025,.98) rotate(1.2deg)}
+}
+@keyframes wakaBlink{
+  0%,45%,49%,92%,96%,100%{filter:drop-shadow(0 4px 8px rgba(0,25,45,.22)) brightness(1)}
+  47%,94%{filter:drop-shadow(0 4px 8px rgba(0,25,45,.22)) brightness(.92)}
+}
+.waka:not(.shake){animation:wakaBreathe 3.8s ease-in-out infinite,wakaBlink 6.5s ease-in-out infinite}
+@keyframes mapIconSwim{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-4px) rotate(2.5deg)}
+}
+#viewMap #stageList .stage:not(.locked) .ic img{animation:mapIconSwim 3.4s ease-in-out infinite}
+#viewMap #stageList .stage:nth-child(2) .ic img{animation-delay:-.6s}
+#viewMap #stageList .stage:nth-child(3) .ic img{animation-delay:-1.2s}
+#viewMap #stageList .stage:nth-child(4) .ic img{animation-delay:-1.8s}
+#viewMap #stageList .stage:nth-child(5) .ic img{animation-delay:-2.4s}
+#viewMap #stageList .stage:nth-child(6) .ic img{animation-delay:-3.0s}
+#viewMap #stageList .stage:nth-child(7) .ic img{animation-delay:-.9s}
+
+@media (prefers-reduced-motion:reduce){
+  .waka:not(.shake),#viewMap #stageList .stage:not(.locked) .ic img{animation:none!important}
+}
+
+/* ===== Phase Upgrade (Items 2, 5, 6, 7, 8) ===== */
+/* 5. QR Scan Laser Line & Success Flash */
+.qr-scan-line{position:absolute;left:10%;right:10%;height:3px;background:linear-gradient(90deg,transparent,#3cc6d9,#a7f3d0,#3cc6d9,transparent);box-shadow:0 0 10px #3cc6d9;border-radius:3px;animation:qrLaserScan 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes qrLaserScan{0%,100%{top:18%}50%{top:80%}}
+.qr-scan-wrap.ok{border-color:#2ec4a6!important;box-shadow:0 0 0 4px rgba(46,196,166,.45),0 8px 20px rgba(6,42,74,.28)!important}
+.qr-scan-wrap.ok .qr-reticle{border-color:#2ec4a6;border-style:solid}
+
+/* 6. Progress Shimmer & Certificate Ready Pulse */
+.progress i{position:relative;overflow:hidden}
+.progress i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);transform:translateX(-100%);animation:progShimmer 2.8s ease-in-out infinite}
+@keyframes progShimmer{0%{transform:translateX(-100%)}55%,100%{transform:translateX(120%)}}
+#certBtn:not(:disabled){animation:certReadyPulse 2s ease-in-out infinite;box-shadow:0 6px 18px rgba(240,191,74,.45)}
+@keyframes certReadyPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02);box-shadow:0 8px 22px rgba(240,191,74,.65)}}
+
+/* 7. Accessibility Focus Visible */
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible,.stage:focus-visible{outline:3px solid #2d7aa6;outline-offset:2px}
+
+/* 8. Offline Status Banner */
+.offline-pill{display:none;position:fixed;bottom:calc(10px + env(safe-area-inset-bottom, 0px));left:50%;transform:translateX(-50%);z-index:70;background:rgba(29,58,82,.94);color:#fff;padding:7px 14px;border-radius:999px;font-family:Prompt,Sarabun,sans-serif;font-size:.78rem;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.28);white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+body.is-offline .offline-pill{display:block}
+
+/* 2. Small / Narrow Screen Support (<= 380px) */
+@media (max-width:380px){
+  .wrap{padding:calc(env(safe-area-inset-top,0px) + 6px) 8px calc(env(safe-area-inset-bottom,0px) + 8px)}
+  .hud b{padding:4px 8px;font-size:.82rem}
+  .qr-btn-row{flex-direction:column;gap:6px}
+  .fb-star{width:44px;height:44px;font-size:1.45rem}
+  .playing-grid{gap:5px}
+  .mcard .b .card-title{font-size:.68rem}
+  #viewMap #stageList .stage{padding:9px 10px;gap:10px}
+  #viewMap #stageList .stage .ic{width:46px;height:46px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .qr-scan-line,.progress i::after,#certBtn:not(:disabled){animation:none!important}
+}
 </style>
 <title>WAGHOR AQUA QUEST ภารกิจพิชิตโลกใต้น้ำ · พิพิธภัณฑ์สัตว์น้ำหว้ากอ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1307,11 +1400,25 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
   <img class="waka" id="ulWaka" data-waka="point" alt="" style="--ww:96px;margin-bottom:6px">
   <h3 id="ulTitle" style="margin:0 0 6px;font-size:1.3rem">🔑 ปลดล็อกด่าน</h3>
   <div class="no-refresh-warn compact" id="ulWarnBanner" role="status"><svg class="nrw-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><span class="nrw-t">ด่านที่ปลดล็อกและคะแนนจะถูกบันทึกไว้ 2 ชั่วโมง</span><span class="nrw-s">หากรีเฟรชกลางด่านจะต้องเริ่มเล่นด่านนั้นใหม่</span></span></div>
-  <p id="ulDesc" style="color:var(--muted);margin:10px 0 16px;font-size:.92rem;line-height:1.4">
-    กรุณากรอก <b>รหัสผ่าน 4 หลัก</b> ที่ติดไว้ ณ ฐานกิจกรรม เพื่อเริ่มทำภารกิจ
+  <p id="ulDesc" style="color:var(--muted);margin:10px 0 12px;font-size:.92rem;line-height:1.4">
+    สแกน <b>QR Code</b> หรือกรอก <b>รหัส 4 หลัก</b> ณ ฐานกิจกรรมเพื่อเริ่มภารกิจ
   </p>
 
-  <input id="ulCode" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="off" oninput="if(this.value.length===4)tryUnlock()" style="text-align:center;font-size:2.2rem;letter-spacing:14px;font-weight:700;width:100%;box-sizing:border-box;padding:12px;margin:0 0 16px;border-radius:14px;border:2px solid var(--aqua);background:var(--foam);color:var(--deep)">
+  <div class="qr-tools">
+    <div class="qr-btn-row">
+      <button type="button" class="btn ok" id="ulScanBtn" onclick="toggleQrScanner()">📷 เปิดกล้องสแกน QR</button>
+      <button type="button" class="btn ghost" id="ulPhotoBtn" onclick="triggerQrPhoto()">📸 ถ่ายรูปสแกน</button>
+    </div>
+    <input type="file" id="qrFileInput" accept="image/*" capture="environment" style="display:none" onchange="handleQrPhotoFile(this)">
+    <div class="qr-scan-wrap" id="qrScanWrap">
+      <video id="qrVideo" playsinline webkit-playsinline muted autoplay disablepictureinpicture></video>
+      <div class="qr-reticle"></div><div class="qr-scan-line"></div>
+    </div>
+    <div class="qr-status" id="qrScanStatus" role="status" aria-live="polite"></div>
+  </div>
+  <div class="qr-or-lbl" id="ulOrPinLbl">หรือกรอกรหัสผ่าน 4 หลัก</div>
+
+  <input id="ulCode" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="off" oninput="if(this.value.length===4)tryUnlock()" style="text-align:center;font-size:2.2rem;letter-spacing:14px;font-weight:700;width:100%;box-sizing:border-box;padding:12px;margin:0 0 14px;border-radius:14px;border:2px solid var(--aqua);background:var(--foam);color:var(--deep)">
   <div class="row">
     <button type="button" class="btn ghost" id="ulCancelBtn" onclick="closeModal()" style="flex:1">ยกเลิก</button>
     <button type="button" class="btn" id="ulSubmitBtn" onclick="tryUnlock()" style="flex:1.4">ปลดล็อกด่าน 🚀</button>
@@ -1361,7 +1468,8 @@ body.in-stage[data-zone="5"]{background:linear-gradient(180deg,#f3e2a8 0%,#f5e8c
     <button class="btn bad" id="rstConfirmBtn" onclick="confirmResetAll()">🗑️ ล้างข้อมูลเริ่มใหม่</button>
   </div>
 </div></div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="offline-pill" id="offlineBanner" role="status" aria-live="polite">📡 กำลังเล่นแบบออฟไลน์ · ความคืบหน้าจะบันทึกไว้ในเครื่อง</div>
 
 <script>
 let FISH_SPEED_LEVEL = 5.72;  // ความเร็วปลาด่าน 1 (เร่งความเร็วปลาทุกตัวเพิ่ม +30% จาก 4.4 เป็น 5.72)
@@ -2042,7 +2150,10 @@ function applyStaticLang(){
   setTxt('fbBackMapBtn','← กลับแผนที่','← Back to Map');
   if(typeof updateFbStarLabel==='function') updateFbStarLabel();
 
-  setHtml('ulDesc','กรุณากรอก <b>รหัสผ่าน 4 หลัก</b> ที่ติดไว้ ณ ฐานกิจกรรม เพื่อเริ่มทำภารกิจ','Please enter the <b>4-digit code</b> posted at this station to start the stage.');
+  setHtml('ulDesc','สแกน <b>QR Code</b> หรือกรอก <b>รหัส 4 หลัก</b> ณ ฐานกิจกรรมเพื่อเริ่มภารกิจ','Scan the <b>QR Code</b> or enter the <b>4-digit code</b> at this station to start.');
+  setTxt('ulScanBtn', qrStream ? '⏹️ ปิดกล้องสแกน' : '📷 เปิดกล้องสแกน QR', qrStream ? '⏹️ Stop Camera' : '📷 Scan QR Camera');
+  setTxt('ulPhotoBtn','📸 ถ่ายรูปสแกน','📸 Snap QR Photo');
+  setTxt('ulOrPinLbl','หรือกรอกรหัสผ่าน 4 หลัก','or enter 4-digit PIN');
   setTxt('ulCancelBtn','ยกเลิก','Cancel');
   setTxt('ulSubmitBtn','ปลดล็อกด่าน','Unlock Stage');
 
@@ -2068,6 +2179,7 @@ function applyStaticLang(){
   setTxt('rstConfirmBtn','🗑️ ล้างข้อมูลเริ่มใหม่','🗑️ Reset All');
 
   syncSndNoteLang();
+  syncOfflineBanner();
 }
 
 let lastResultArgs=null;
@@ -2273,7 +2385,8 @@ function openUnlock(id){
   ulId=id;
   const s=getStage(id);
   document.getElementById('ulTitle').textContent=L(`🔑 ปลดล็อกด่านที่ ${id}: ${stName(s)}`,`🔑 Unlock Stage ${id}: ${stName(s)}`);
-  document.getElementById('ulDesc').innerHTML=L(`กรุณากรอก <b>รหัสผ่าน 4 หลัก</b> ที่ติดไว้ภายในนิทรรศการเพื่อเริ่มทำภารกิจ`,`Please enter the <b>4-digit code</b> posted at this station to start the stage.`);
+  document.getElementById('ulDesc').innerHTML=L(`สแกน <b>QR Code</b> หรือกรอก <b>รหัส 4 หลัก</b> ที่ติดไว้ภายในนิทรรศการเพื่อเริ่มทำภารกิจ`,`Scan the <b>QR Code</b> or enter the <b>4-digit code</b> posted at this station to start.`);
+  const stEl=document.getElementById('qrScanStatus'); if(stEl) stEl.textContent='';
   const inp=document.getElementById('ulCode');
   if(inp){ inp.value=''; }
   wakaReset();
@@ -2282,7 +2395,180 @@ function openUnlock(id){
 }
 
 function closeModal(){
+  stopQrScanner();
   document.getElementById('unlockModal').classList.remove('show');
+}
+
+
+/* ===== ระบบสแกน QR Code ในหน้าเกม (BarcodeDetector + jsQR Fallback + ถ่ายรูปสแกน) ===== */
+let qrStream=null, qrRaf=null, qrCanvas=null, qrCtx=null, qrDetector=null, qrJsLoaded=false;
+
+function extractPinFromQr(raw){
+  const s=String(raw||'').trim();
+  const mUrl=s.match(/[?&](?:pin|unlock|code)=(\d{4})/i);
+  if(mUrl) return mUrl[1];
+  const mExact=s.match(/^\D*(\d{4})\D*$/);
+  if(mExact) return mExact[1];
+  const mAny=s.match(/(\d{4})/);
+  return mAny?mAny[1]:'';
+}
+
+function loadJsQrLib(){
+  if(window.jsQR) return Promise.resolve(true);
+  if(navigator.onLine===false) return Promise.resolve(false);
+  if(qrJsLoaded) return new Promise(r=>{const iv=setInterval(()=>{if(window.jsQR){clearInterval(iv);r(true)}},100);setTimeout(()=>{clearInterval(iv);r(false)},4000)});
+  qrJsLoaded=true;
+  return new Promise(res=>{
+    const sc=document.createElement('script');
+    sc.src='https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js';
+    sc.onload=()=>res(true);
+    sc.onerror=()=>{qrJsLoaded=false;res(false);};
+    document.head.appendChild(sc);
+  });
+}
+
+let qrLibUnavailable=false;
+async function decodeQrFromSource(src, w, h, isPhoto=false){
+  qrLibUnavailable=false;
+  if('BarcodeDetector' in window){
+    try{
+      if(!qrDetector) qrDetector=new BarcodeDetector({formats:['qr_code']});
+      const hits=await qrDetector.detect(src);
+      if(hits && hits.length && hits[0].rawValue) return hits[0].rawValue;
+    }catch(_){}
+  }
+  const ok=await loadJsQrLib();
+  if(!ok || !window.jsQR){
+    qrLibUnavailable=true;
+    return '';
+  }
+  if(!qrCanvas){qrCanvas=document.createElement('canvas');qrCtx=qrCanvas.getContext('2d',{willReadFrequently:true});}
+  const tryRegion=(sx,sy,sw,sh,maxDim)=>{
+    const scale=Math.min(1, maxDim/Math.max(sw,sh));
+    const cw=Math.max(1,Math.round(sw*scale)), ch=Math.max(1,Math.round(sh*scale));
+    qrCanvas.width=cw; qrCanvas.height=ch;
+    qrCtx.drawImage(src,sx,sy,sw,sh,0,0,cw,ch);
+    const imgData=qrCtx.getImageData(0,0,cw,ch);
+    const code=window.jsQR(imgData.data,cw,ch,{inversionAttempts:'attemptBoth'});
+    return (code && code.data)?code.data:'';
+  };
+  const rw=w||640, rh=h||640;
+  let out=tryRegion(0,0,rw,rh,isPhoto?1200:640);
+  if(!out && isPhoto && rw>200 && rh>200){
+    out=tryRegion(Math.round(rw*0.15),Math.round(rh*0.15),Math.round(rw*0.7),Math.round(rh*0.7),1000);
+  }
+  return out;
+}
+
+function handleDecodedQr(rawText){
+  const pin=extractPinFromQr(rawText);
+  if(!pin) return false;
+  const wrap=document.getElementById('qrScanWrap');
+  if(wrap && wrap.classList.contains('on')){
+    wrap.classList.add('ok');
+    sfx.ok();
+    setTimeout(()=>{
+      wrap.classList.remove('ok');
+      stopQrScanner();
+      const inp=document.getElementById('ulCode');
+      if(inp) inp.value=pin;
+      tryUnlock();
+    },200);
+  }else{
+    stopQrScanner();
+    const inp=document.getElementById('ulCode');
+    if(inp) inp.value=pin;
+    tryUnlock();
+  }
+  return true;
+}
+
+function stopQrScanner(){
+  if(qrRaf){cancelAnimationFrame(qrRaf);qrRaf=null;}
+  if(qrStream){
+    try{qrStream.getTracks().forEach(t=>t.stop())}catch(_){}
+    qrStream=null;
+  }
+  const wrap=document.getElementById('qrScanWrap'); if(wrap) wrap.classList.remove('on');
+  const vid=document.getElementById('qrVideo'); if(vid){try{if(vid.webkitExitFullscreen)vid.webkitExitFullscreen();if(document.fullscreenElement)document.exitFullscreen();}catch(_){} vid.srcObject=null;}
+  const btn=document.getElementById('ulScanBtn');
+  if(btn) btn.textContent=L('📷 เปิดกล้องสแกน QR','📷 Scan QR Camera');
+}
+
+async function toggleQrScanner(){
+  if(qrStream){stopQrScanner();return;}
+  const stEl=document.getElementById('qrScanStatus');
+  const btn=document.getElementById('ulScanBtn');
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    if(stEl) stEl.textContent=L('⚠️ เบราว์เซอร์นี้ไม่รองรับกล้องสด กรุณากด "📸 ถ่ายรูปสแกน" หรือกรอกรหัส 4 หลัก','⚠️ Live camera unavailable here. Use "📸 Snap QR Photo" or enter the 4-digit PIN.');
+    return;
+  }
+  try{
+    if(stEl) stEl.textContent=L('⏳ กำลังเปิดกล้อง...','⏳ Starting camera...');
+    qrStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});
+    const vid=document.getElementById('qrVideo');
+    const wrap=document.getElementById('qrScanWrap');
+    wrap.classList.add('on');
+    vid.setAttribute('playsinline','');
+    vid.setAttribute('webkit-playsinline','');
+    vid.playsInline=true;
+    vid.muted=true;
+    vid.controls=false;
+    vid.srcObject=qrStream;
+    await vid.play();
+    if(btn) btn.textContent=L('⏹️ ปิดกล้องสแกน','⏹️ Stop Camera');
+    if(stEl) stEl.textContent=L('🎯 ส่องกล้องไปที่ป้าย QR Code ประจำด่านได้เลย','🎯 Point your camera at the stage QR Code');
+    if(!('BarcodeDetector' in window)) loadJsQrLib();
+    let busy=false, lastScan=0;
+    const scanLoop=async(now)=>{
+      if(!qrStream) return;
+      if(!busy && now-lastScan>180 && vid.readyState>=2){
+        busy=true; lastScan=now;
+        try{
+          const raw=await decodeQrFromSource(vid, vid.videoWidth||640, vid.videoHeight||480);
+          if(raw && handleDecodedQr(raw)){busy=false;return;}
+        }catch(_){}
+        busy=false;
+      }
+      qrRaf=requestAnimationFrame(scanLoop);
+    };
+    qrRaf=requestAnimationFrame(scanLoop);
+  }catch(e){
+    stopQrScanner();
+    if(stEl) stEl.textContent=L('⚠️ เปิดกล้องไม่สำเร็จ (อาจไม่ได้อนุญาตสิทธิ์กล้อง) ใช้ "📸 ถ่ายรูปสแกน" หรือพิมพ์รหัส 4 หลักแทนได้ครับ','⚠️ Could not open camera. Please use "📸 Snap QR Photo" or type the 4-digit PIN.');
+  }
+}
+
+function triggerQrPhoto(){
+  const inp=document.getElementById('qrFileInput');
+  if(inp){inp.value='';inp.click();}
+}
+
+async function handleQrPhotoFile(input){
+  const file=input && input.files && input.files[0];
+  if(!file) return;
+  const stEl=document.getElementById('qrScanStatus');
+  if(stEl) stEl.textContent=L('⏳ กำลังอ่าน QR Code จากภาพ...','⏳ Reading QR Code from photo...');
+  try{
+    const url=URL.createObjectURL(file);
+    const img=new Image();
+    img.onload=async()=>{
+      const raw=await decodeQrFromSource(img, img.naturalWidth||img.width, img.naturalHeight||img.height, true);
+      URL.revokeObjectURL(url);
+      if(raw && handleDecodedQr(raw)){
+        if(stEl) stEl.textContent='';
+      }else{
+        sfx.bad();
+        if(stEl) stEl.textContent=qrLibUnavailable
+          ? L('⚠️ โหลดตัวอ่าน QR ไม่สำเร็จ (อาจเปิดในโหมด Preview หรือไม่มีเน็ต) กรุณาเปิดผ่าน Safari/Chrome หรือพิมพ์รหัส 4 หลัก','⚠️ QR decoder unavailable (blocked in Preview or offline). Open in Safari/Chrome or enter 4-digit PIN.')
+          : L('❌ ไม่พบ QR Code ในภาพ ลองถ่ายให้ชัดขึ้นหรือพิมพ์รหัส 4 หลักครับ','❌ No QR Code found in photo. Try again or enter the 4-digit PIN.');
+      }
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);if(stEl) stEl.textContent=L('❌ อ่านไฟล์ภาพไม่สำเร็จ','❌ Could not load image');};
+    img.src=url;
+  }catch(e){
+    if(stEl) stEl.textContent=L('❌ ไม่สามารถอ่านภาพได้','❌ Could not decode photo');
+  }
 }
 
 function tryUnlock(){
@@ -2390,7 +2676,34 @@ function bindTouchDragDrop(containerEl, onDropPair){
    9. ระบบกลางของเกม & หน้าสรุปเฉลยความรู้ (เกณฑ์ผ่าน 50%)
    ========================================================================= */
 let G={timers:[],cleanups:[],raf:null,ended:false,paused:false,curStageId:1,combo:0,maxCombo:0,onLangChange:null};
+
+/* ===== Screen Wake Lock & Offline Status (Items 4 & 8) ===== */
+let _wakeLock=null;
+async function requestWakeLock(){
+  try{
+    if('wakeLock' in navigator && document.visibilityState==='visible' && !_wakeLock){
+      _wakeLock=await navigator.wakeLock.request('screen');
+      _wakeLock.addEventListener('release',()=>{_wakeLock=null;});
+    }
+  }catch(_){}
+}
+function releaseWakeLock(){
+  try{if(_wakeLock){_wakeLock.release();_wakeLock=null;}}catch(_){}
+}
+function syncOfflineBanner(){
+  const off=navigator.onLine===false;
+  document.body.classList.toggle('is-offline',off);
+  const el=document.getElementById('offlineBanner');
+  if(el) el.textContent=L('📡 กำลังเล่นแบบออฟไลน์ · ความคืบหน้าจะบันทึกไว้ในเครื่อง','📡 Offline mode · Progress is saved locally');
+}
+window.addEventListener('online',syncOfflineBanner);
+window.addEventListener('offline',syncOfflineBanner);
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible' && document.getElementById('viewGame').classList.contains('active')) requestWakeLock();
+});
+
 function stopGame(){
+  releaseWakeLock();
   G.timers.forEach(id=>{clearInterval(id);clearTimeout(id)});G.timers=[];
   if(G.cleanups){G.cleanups.forEach(fn=>{try{fn()}catch(e){}});G.cleanups=[]}
   cancelAnimationFrame(G.raf);G.paused=false;G.onLangChange=null;G.onPauseRender=null;
@@ -2464,6 +2777,7 @@ function startStage(id){
   document.body.dataset.zone=String((s&&s.zoneNum)||STAGE_ZONE[id]||1);
   if(S && typeof S==='object'){S.activeStageId=id;}
   stopGame();G.ended=false;G.paused=false;G.curStageId=id;G.combo=0;G.maxCombo=0;lastResultArgs=null;go('viewGame');
+  requestWakeLock();
   const origKey=(s&&s.origId)||id;
   const fn={1:game1,2:game2,3:game3,4:game4,5:game5,6:game6,7:game7}[origKey];
   if(fn) fn(id);
@@ -5295,8 +5609,19 @@ window.addEventListener('beforeunload',e=>{
 document.getElementById('ulCode').addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock()});
 (function(){
   const ua=navigator.userAgent||'';
-  const isInApp=/Line\/|FBAN|FBAV|FB_IAB|Instagram|BytedanceWebview|Musical_ly|TikTok|MicroMessenger|Twitter|Snapchat|KAKAOTALK|Zalo/i.test(ua);
-  const isIOS=/iPhone|iPad|iPod/i.test(ua);
+  const isIOS=/iPhone|iPad|iPod/i.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  const isIosWebView=isIOS && /AppleWebKit/i.test(ua) && (!/Safari\//i.test(ua) || !/Version\/[\d.]+/i.test(ua)) && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
+  const isAndroidWebView=/Android/i.test(ua) && (/;\s*wv\)/i.test(ua) || /\bwv\b/i.test(ua));
+  const isKnownInApp=/Line\/|FBAN|FBAV|FB_IAB|Instagram|BytedanceWebview|Musical_ly|TikTok|MicroMessenger|Twitter|Snapchat|KAKAOTALK|Zalo|GSA\/|GoogleApp|Telegram|Discord|WhatsApp|Threads|Pinterest|LinkedInApp|QQ\/|Weibo|QR|Scanner/i.test(ua);
+  let isEmbedded=false;
+  try{ isEmbedded = (window.self !== window.top); }catch(_){ isEmbedded=true; }
+  const isInApp = isKnownInApp || isIosWebView || isAndroidWebView || isEmbedded;
+  // หมายเหตุ: ตัวสแกนรหัส (Code Scanner) ใน iPhone ใช้ SFSafariViewController ซึ่งปลอม UA เหมือน Safari ทุกประการ
+  // จึงต้องแสดงหน้าต่างเตือนให้ตรวจสอบบน iPhone ในครั้งแรกที่เปิด (บันทึกการปิดไว้ใน sessionStorage ไม่ให้เด้งซ้ำ)
+  const isIosStandalone = Boolean(window.navigator && window.navigator.standalone);
+  const isIosOtherMainBrowser = isIOS && /CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua);
+  const isIosNeedCheck = isIOS && !isInApp && !isIosStandalone && !isIosOtherMainBrowser;
+
   window.renderInAppModal=function(){
     const t=document.getElementById('iabTitle');
     const d=document.getElementById('iabDesc');
@@ -5305,23 +5630,31 @@ document.getElementById('ulCode').addEventListener('keydown',e=>{if(e.key==='Ent
     const xb=document.getElementById('iabCloseBtn');
     if(!t||!d||!s||!cb||!xb) return;
     t.textContent=L('🌐 แนะนำให้เปิดผ่านเบราว์เซอร์หลัก','🌐 Open in Main Browser');
-    d.textContent=L(
-      'คุณกำลังเปิดเกมผ่านแอปแชท ซึ่งอาจทำให้ข้อมูลด่านหายหรือบันทึกรูปเกียรติบัตรไม่ได้ แนะนำให้สลับไปเปิดในเบราว์เซอร์เริ่มต้น (เช่น Chrome หรือ Safari) ตามขั้นตอนนี้:',
-      'You are opening this game inside a chat app. To keep your progress saved and download your certificate smoothly, please open it in Safari or Chrome:'
-    );
-    s.innerHTML=isIOS
+    d.textContent=isIosNeedCheck
       ? L(
-          '<strong>สำหรับ iPhone / iPad:</strong><br>1. แตะไอคอน <strong>จุดสามจุด (•••)</strong> หรือปุ่ม <strong>แชร์ (↑)</strong> ที่มุมจอ<br>2. เลือก <strong>"เปิดในเบราเซอร์"</strong> (Open in Safari)<br>3. หรือกด <strong>คัดลอกลิงก์</strong> ด้านล่างแล้วนำไปวางในแอป Safari',
-          '<strong>For iPhone / iPad:</strong><br>1. Tap the <strong>•••</strong> menu or <strong>Share (↑)</strong> icon<br>2. Choose <strong>"Open in Safari"</strong><br>3. Or tap <strong>Copy Link</strong> below and paste it into Safari'
+          'หากคุณสแกนผ่าน "ตัวสแกนรหัส" หรือแอปแชท (สังเกตจะมีปุ่ม "เสร็จสิ้น" ด้านบน) หน้าจอเกมและกล้องสแกนด่านอาจแสดงผลไม่สมบูรณ์ แนะนำให้เปิดในแอป Safari เต็มจอก่อนเล่นครับ:',
+          'If you opened this via iPhone Code Scanner or a chat app (you will see a "Done" button at top), please switch to full Safari for the best UI and camera scanner:'
         )
       : L(
-          '<strong>สำหรับ Android:</strong><br>1. แตะไอคอน <strong>จุดสามจุด (⋮)</strong><br>2. เลือก <strong>"เปิดใน Chrome"</strong> หรือ <strong>"เปิดด้วยเบราว์เซอร์เริ่มต้น"</strong><br>3. หรือกด <strong>คัดลอกลิงก์</strong> ด้านล่างแล้วนำไปวางในแอป Chrome',
+          'คุณกำลังเปิดเกมผ่านแอปแชทหรือตัวสแกน QR ซึ่งอาจทำให้หน้าจอแสดงผลไม่สมบูรณ์ กล้องสแกนไม่ทำงาน ข้อมูลด่านหาย หรือบันทึกรูปเกียรติบัตรไม่ได้ แนะนำให้เปิดใน Safari หรือ Chrome:',
+          'You are opening this game inside a chat app or QR scanner. To ensure full UI display, camera scanning, saved progress, and certificate download, please open it in Safari or Chrome:'
+        );
+    s.innerHTML=isIOS
+      ? L(
+          '<strong>สำหรับ iPhone / iPad:</strong><br>1. แตะไอคอน <strong>เข็มทิศ Safari (🧭)</strong> ที่มุมล่างขวา เพื่อสลับเข้าแอป Safari ทันที<br>2. หรือแตะ <strong>จุดสามจุด (•••)</strong> / ปุ่ม <strong>แชร์ (↑)</strong> แล้วเลือก <strong>"เปิดใน Safari"</strong><br>3. หรือกด <strong>คัดลอกลิงก์</strong> ด้านล่างแล้วนำไปวางในแอป Safari',
+          '<strong>For iPhone / iPad:</strong><br>1. Tap the <strong>Safari compass icon (🧭)</strong> at the bottom-right to open directly in Safari<br>2. Or tap <strong>•••</strong> / <strong>Share (↑)</strong> and choose <strong>"Open in Safari"</strong><br>3. Or tap <strong>Copy Link</strong> below and paste it into Safari'
+        )
+      : L(
+          '<strong>สำหรับ Android:</strong><br>1. แตะไอคอน <strong>จุดสามจุด (⋮)</strong> ที่มุมขวาบน<br>2. เลือก <strong>"เปิดใน Chrome"</strong> หรือ <strong>"เปิดด้วยเบราว์เซอร์เริ่มต้น"</strong><br>3. หรือกด <strong>คัดลอกลิงก์</strong> ด้านล่างแล้วนำไปวางในแอป Chrome',
           '<strong>For Android:</strong><br>1. Tap the <strong>⋮</strong> menu at the top-right<br>2. Choose <strong>"Open in Chrome"</strong> or <strong>"Open in browser"</strong><br>3. Or tap <strong>Copy Link</strong> below and paste it into Chrome'
         );
     cb.textContent=L('📋 คัดลอกลิงก์','📋 Copy Link');
-    xb.textContent=L('เล่นต่อในหน้านี้','Continue Here');
+    xb.textContent=isIosNeedCheck
+      ? L('✅ เปิดใน Safari อยู่แล้ว','✅ Already in Safari')
+      : L('เล่นต่อในหน้านี้','Continue Here');
   };
   window.closeInAppModal=function(){
+    try{ sessionStorage.setItem('wk_iab_seen','1'); }catch(_){}
     const m=document.getElementById('inAppBrowserModal');
     if(m) m.classList.remove('show');
   };
@@ -5340,7 +5673,10 @@ document.getElementById('ulCode').addEventListener('keydown',e=>{if(e.key==='Ent
     document.body.removeChild(ta);
   }
   renderInAppModal();
-  if(isInApp){
+  let alreadySeen=false;
+  try{ alreadySeen = sessionStorage.getItem('wk_iab_seen')==='1'; }catch(_){}
+  const shouldWarn = isInApp || (isIosNeedCheck && !alreadySeen && !(window.S && S.name));
+  if(shouldWarn){
     setTimeout(()=>{
       const m=document.getElementById('inAppBrowserModal');
       if(m) m.classList.add('show');
@@ -5348,6 +5684,19 @@ document.getElementById('ulCode').addEventListener('keydown',e=>{if(e.key==='Ent
   }
 })();
 
+try{
+  const qp=new URLSearchParams(location.search);
+  const qPin=(qp.get('pin')||qp.get('unlock')||'').trim();
+  if(/^\d{4}$/.test(qPin)){
+    const targetSt=STAGES_DATA.find(x=>x.code===qPin);
+    if(targetSt && isPrevStagePassed(targetSt.id)){
+      S.stages[targetSt.id].unlocked=true;
+      save();
+      history.replaceState(null,'',location.pathname);
+      setTimeout(()=>{go('viewMap');startStage(targetSt.id);},250);
+    }
+  }
+}catch(_){}
 </script>
 </body>
 </html>
