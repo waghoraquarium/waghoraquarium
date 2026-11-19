@@ -532,7 +532,7 @@ header.top{color:var(--deep)}header.top p{opacity:.7}
 .start-wrap h1{margin:6px 0 0;font-size:clamp(2.4rem,min(10.5vw,9vh),4.4rem);line-height:1.2;color:var(--deep)}
 .start-wrap p{margin:0;font-size:clamp(1.15rem,4.2vw,1.6rem);color:var(--muted)}
 .start-dots{display:flex;gap:clamp(10px,2.5vw,16px);margin:6px 0}.start-dots i{width:clamp(14px,3.4vw,20px);height:clamp(14px,3.4vw,20px);border-radius:50%;background:#dbe8f0}.start-dots i.on{background:#a9e1bf}
-.start-wrap .btn{width:min(92vw,460px);font-size:clamp(1.3rem,5vw,1.7rem);padding:clamp(18px,3vh,26px) 20px;border-radius:24px;margin-top:10px;box-shadow:0 10px 26px rgba(95,143,176,.25)}
+.start-wrap .btn{width:min(100%,440px);margin-left:auto;margin-right:auto;font-size:clamp(1.3rem,5vw,1.7rem);padding:clamp(18px,3vh,26px) 20px;border-radius:24px;margin-top:10px;box-shadow:0 10px 26px rgba(95,143,176,.25)}
 #startInfo{font-size:clamp(1rem,3.6vw,1.2rem);color:var(--muted)}
 /* ===== โทนเข้มขึ้น (อ่านง่าย สบายตา) — ทับธีมพาสเทลด้านบน ===== */
 :root{--deep:#1d3a52;--ocean:#2d6d93;--sea:#2d7aa6;--aqua:#7fc0d8;--foam:#e3eff5;--sand:#f3e7cc;--coral:#e58a7a;--gold:#f0bf4a;--ok:#3a9f6a;--bad:#d1566a;--txt:#1f3547;--muted:#566e80}
@@ -839,7 +839,7 @@ body.in-stage #s45App{padding-top:10px}
 .pause-lang-box .lang-btn{position:static;height:36px;box-shadow:0 2px 6px rgba(0,30,60,.15);border:1px solid #c5d9e4}
 .wrap{padding:calc(env(safe-area-inset-top, 0px) + 14px) 12px 24px}
 header.top{padding:26px 0 4px}
-#staffLogo{display:inline-flex;align-items:center;justify-content:center;}
+#staffLogo{display:inline-flex;align-items:center;justify-content:center}
 #staffLogo img{max-height:84px;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,20,40,.22))}
 .sdec.d1{top:calc(env(safe-area-inset-top, 0px) + 64px);left:6%}
 .sdec.d2{top:calc(env(safe-area-inset-top, 0px) + 68px);right:6%}
@@ -850,7 +850,7 @@ header.top{padding:26px 0 4px}
 .no-refresh-warn .nrw-ic{flex:0 0 auto;width:20px;height:20px;color:#158a70;opacity:.92}
 .no-refresh-warn .nrw-t{display:block;font-weight:600;font-size:.86rem;line-height:1.3;color:#0b3b3c}
 .no-refresh-warn .nrw-s{display:block;font-weight:400;font-size:.75rem;line-height:1.3;color:rgba(15,61,62,.84);margin-top:1px}
-.no-refresh-warn.start-banner{width:min(90vw,440px);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.65);border-left-color:#1f9d82;box-shadow:0 4px 14px rgba(0,15,35,.14);padding:7px 12px;margin:2px 0}
+.no-refresh-warn.start-banner{width:min(100%,440px);margin-left:auto;margin-right:auto;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,.65);border-left-color:#1f9d82;box-shadow:0 4px 14px rgba(0,15,35,.14);padding:7px 12px;margin:2px 0}
 .no-refresh-warn.start-banner .nrw-t{font-size:clamp(.86rem,3.2vw,.95rem)}
 .no-refresh-warn.compact{padding:6px 9px;margin:4px 0 7px}
 .no-refresh-warn.compact .nrw-t{font-size:.82rem}
@@ -1895,7 +1895,6 @@ function checkSessionExpiry(){
     if((Date.now()-Number(S.updatedAt))>SESSION_TTL_MS){
       safeStorageRemove(KEY);
       S=createDefaultState();
-      staffAuthOk=false;
       curFbStar=0;
       const nmEl=document.getElementById('nmName');if(nmEl)nmEl.value='';
       const cmEl=document.getElementById('fbComment');if(cmEl)cmEl.value='';
@@ -1920,7 +1919,6 @@ function closeResetModal(){
 function confirmResetAll(){
   sfx.tap();
   document.getElementById('resetModal').classList.remove('show');
-  staffAuthOk=false;
   curFbStar=0;
   const nmEl=document.getElementById('nmName');if(nmEl)nmEl.value='';
   const cmEl=document.getElementById('fbComment');if(cmEl)cmEl.value='';
@@ -2154,7 +2152,6 @@ function applyStaticLang(){
   setTxt('fbBackMapBtn','← กลับแผนที่','← Back to Map');
   if(typeof updateFbStarLabel==='function') updateFbStarLabel();
 
-
   setHtml('ulDesc','สแกน <b>QR Code</b> หรือกรอก <b>รหัส 4 หลัก</b> ณ ฐานกิจกรรมเพื่อเริ่มภารกิจ','Scan the <b>QR Code</b> or enter the <b>4-digit code</b> at this station to start.');
   setTxt('ulScanBtn', qrStream ? '⏹️ ปิดกล้องสแกน' : '📷 เปิดกล้องสแกน QR', qrStream ? '⏹️ Stop Camera' : '📷 Scan QR Camera');
   setTxt('ulPhotoBtn','📸 ถ่ายรูปสแกน','📸 Snap QR Photo');
@@ -2168,7 +2165,6 @@ function applyStaticLang(){
   setTxt('nmSaveBtn','เริ่มผจญภัย 🌊','Start Adventure 🌊');
   setHtml('nmPdpaNote','🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น','🔒 <b>Privacy Notice (PDPA):</b> Your name, organization, and score will be used solely to issue your electronic certificate and compile service statistics for Waghor Aquarium.');
   setHtml('fbPdpaNote','🔒 <b>การคุ้มครองข้อมูลส่วนบุคคล (PDPA):</b> ข้อมูลชื่อ-นามสกุล หน่วยงาน และคะแนนของท่าน จะถูกนำไปใช้เพื่อออกเกียรติบัตรอิเล็กทรอนิกส์ และสรุปผลสถิติการให้บริการของพิพิธภัณฑ์สัตว์น้ำหว้ากอเท่านั้น','🔒 <b>Privacy Notice (PDPA):</b> Your name, organization, and score will be used solely to issue your electronic certificate and compile service statistics for Waghor Aquarium.');
-
 
   setTxt('pauseTitle','พักการผจญภัยชั่วคราว','Adventure Paused');
   setTxt('pauseLangLbl','🌐 เปลี่ยนภาษา:','🌐 Language:');
@@ -2368,7 +2364,7 @@ function renderStart(){
   if(typeof renderInAppModal==='function') renderInAppModal();
 }
 function enterApp(){sfx.tap();go('viewMap');askName()}
-function askName(){if(staffAuthOk)return;if(!S.name)document.getElementById('nameModal').classList.add('show')}
+function askName(){if(!S.name)document.getElementById('nameModal').classList.add('show')}
 function saveName(){
   const n=document.getElementById('nmName').value.trim();
   if(!n)return toast(L('กรุณาใส่ชื่อก่อนนะ','Please enter your name first'));
@@ -2608,7 +2604,6 @@ function unlockStageSuccess(id){
   renderMap();
   startStage(id);
 }
-
 
 /* =========================================================================
    8. ระบบลากวาง (Drag & Drop + แตะเลือกวาง)
@@ -5357,17 +5352,15 @@ async function downloadCertificatePNG(){
    ========================================================================= */
 const SURVEY_CONFIG={
   googleFormUrl:'https://docs.google.com/forms/d/e/1FAIpQLScxEZFPnf8WqMufdo02KUPU1KGzWLXPEEcqFM0GrkAUAtSVGg/viewform?usp=header',
-  // วาง URL ของ Google Apps Script Web App ที่นี่เพื่อให้ผู้เล่นทุกคนส่งข้อมูลเข้า Google Sheet เดียวกันทันที
-  sheetWebhookUrl:'https://script.google.com/macros/s/AKfycbw_sDZzp7wqtU-KOUS4JV4d4jKJmQ5fLNHQHwWmvxGqs02-gDTh94kCnqJz5AOM7dR6/exec',
-  // (ทางเลือก) วางลิงก์หน้าตาราง Google Sheet เพื่อให้ผู้ดูแลกดเปิดตารางจากหน้าสรุปผลได้ทันที
-  sheetViewUrl:'https://docs.google.com/spreadsheets/d/1oc_WGUb8bVB6uBBLKceGwNS31lrfnbzzZtdW0HI23O8/edit?gid=2043458521#gid=2043458521'
+  // วาง URL ของ Google Apps Script Web App ที่นี่เพื่อให้ผู้เล่นทุกคนส่งข้อมูลเข้า Google Sheet เดียวกันทันที (ส่งขาเดียว)
+  sheetWebhookUrl:'https://script.google.com/macros/s/AKfycbw_sDZzp7wqtU-KOUS4JV4d4jKJmQ5fLNHQHwWmvxGqs02-gDTh94kCnqJz5AOM7dR6/exec'
 };
 
 let curFbStar=0;
 let fbSubmitting=false;
 
 function getActiveWebhookUrl(){
-  return (SURVEY_CONFIG.sheetWebhookUrl || safeStorageGet('wk_admin_webhook_url') || '').trim();
+  return (SURVEY_CONFIG.sheetWebhookUrl || '').trim();
 }
 
 function getStarRatingLabel(v){
@@ -5518,7 +5511,7 @@ async function submitPlayerFeedback(){
     btn.textContent=L('⏳ กำลังบันทึกคะแนนและเปิดหน้าเกียรติบัตร...','⏳ Saving rating & opening certificate...');
   }
 
-  // บันทึกลงประวัติในเครื่องและคิวส่งข้อมูล เพื่อให้หน้ากราฟแสดงผลได้ทันทีแม้สคริปต์ฝั่ง Sheet ยังไม่ได้อัปเดตเวอร์ชัน
+  // เพิ่มเข้าคิวส่งข้อมูลเข้า Google Sheet ขาเดียว
   const q=fbReadQueue();q.push(entry);fbWriteQueue(q);
   fbPostEntry(entry).then(ok=>{
     if(ok){
@@ -5538,7 +5531,6 @@ async function submitPlayerFeedback(){
   toast(L('ขอบคุณสำหรับคะแนนความพึงพอใจครับ! เชิญรับเกียรติบัตรได้เลย 🏅','Thank you for rating! Here is your certificate 🏅'));
   go('viewCert');
 }
-
 
 /* ตราประทับกระแทกลงพาสปอร์ตเมื่อผ่านด่าน */
 (function(){
@@ -5619,7 +5611,6 @@ window.addEventListener('beforeunload',e=>{
   }
 });
 document.getElementById('ulCode').addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock()});
-
 (function(){
   /* ตรวจว่าเปิดนอกเบราว์เซอร์หลักหรือไม่ — เตือนเฉพาะเมื่อเจอหลักฐานจริง
      1) แอปแชท/WebView ที่ระบุได้ชัด  2) เก็บข้อมูลไม่ได้  3) กล้องใช้ไม่ได้ตอนกดสแกน
